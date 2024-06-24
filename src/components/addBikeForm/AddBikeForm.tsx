@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Box, TextField, Button, Container, Grid, InputAdornment, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Bicycle } from '@/interfaces/bike';
 export default function AddBikeForm() {
 
-  const [bikeData, setBikeData] = useState({
+  const [bikeData, setBikeData] = useState <Bicycle>({
     user_id: 1,
     name: '',
     brand: '',
     model: '',
     type: '',
-    value: '',
+    value: 0,
     frame_num: '',
     frame_size: '',
     colour: '',
@@ -21,28 +22,42 @@ export default function AddBikeForm() {
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
+    const parsedValue = name === 'value' ? parseInt(value) : value;
     setBikeData(prevState => ({
       ...prevState,
-      [name]: value,
+      [name]: parsedValue,
     }));
   };
 
   const handleCreateBike = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/bicycles', {
+      fetch('http://localhost:3000/api/bicycles', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(bikeData),
+      })
+      .then(response=>response.json())
+      .then(response=>{
+        fetch('http://localhost:3000/api/bicycles', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bikeData),
+        })
+        console.log(response.id)
       });
 
-      if (!response.ok) {
-        throw new Error('Something went wrong');
-      }
+      // if (!response.ok) {
+      //   throw new Error('Something went wrong');
+      // }
 
-      const data = await response.json();
-      console.log(data);
+
+
+
+      // console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -111,8 +126,8 @@ export default function AddBikeForm() {
                 value={bikeData.owner}
                 onChange={handleChange}
               >
-                <MenuItem value="Yes">Yes</MenuItem>
-                <MenuItem value="No">No</MenuItem>
+                <MenuItem value="true">Yes</MenuItem>
+                <MenuItem value="false">No</MenuItem>
               </Select>
             </FormControl>
             </Grid>
@@ -196,6 +211,7 @@ export default function AddBikeForm() {
               >
                 <MenuItem value="M">M</MenuItem>
                 <MenuItem value="F">F</MenuItem>
+                <MenuItem value="U">Unisex</MenuItem>
               </Select>
             </FormControl>
             </Grid>
