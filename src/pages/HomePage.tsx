@@ -1,8 +1,10 @@
+import { CustomMap } from "@/components/mapComponent/customMap";
 
 export function HomePage () {
   return (
     <div>
-      HomePage      
+      HomePage     
+      <CustomMap></CustomMap> 
     </div>
   );
 }
