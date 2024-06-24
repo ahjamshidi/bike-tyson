@@ -1,9 +1,18 @@
-import AddBikeForm from "@/components/addBikeForm/AddBikeForm";
-export function AddBikePage () {
+import AddBikeForm from '@/components/addBikeForm/AddBikeForm';
+import { Box } from '@mui/material';
+export function AddBikePage() {
   return (
-    <div>
-      Add a bike
+    <Box sx={{
+      width: '100%',
+      maxWidth: '500px',
+      overflowY: 'auto',
+      maxHeight: 'calc(100vh - 120px)',
+      padding: '0 20px',
+      boxSizing: 'border-box',
+      mt: 8,
+      pb: 7,
+    }}>
       <AddBikeForm></AddBikeForm>
-    </div>
+    </Box>
   );
 }

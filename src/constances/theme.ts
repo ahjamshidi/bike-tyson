@@ -1,5 +1,16 @@
 import { ThemeOptions } from '@mui/material/styles';
 export const themeOptions: ThemeOptions = {
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          margin: 0,
+          height: '100vh',
+          overflow: 'hidden', // Prevent body scroll
+        },
+      },
+    },
+  },
   palette: {
     mode: 'light',
     common: {

@@ -1,10 +1,20 @@
 import { useState } from 'react';
-import { Box, TextField, Button, Container, Grid, InputAdornment, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import {
+  Box,
+  TextField,
+  Button,
+  Container,
+  Grid,
+  InputAdornment,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Bicycle } from '@/interfaces/bike';
 export default function AddBikeForm() {
-
-  const [bikeData, setBikeData] = useState <Bicycle>({
+  const [bikeData, setBikeData] = useState<Bicycle>({
     user_id: 1,
     name: '',
     brand: '',
@@ -17,13 +27,13 @@ export default function AddBikeForm() {
     gender: '',
     description: '',
     photos_url: [],
-    owner: true
+    owner: true,
   });
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     const parsedValue = name === 'value' ? parseInt(value) : value;
-    setBikeData(prevState => ({
+    setBikeData((prevState) => ({
       ...prevState,
       [name]: parsedValue,
     }));
@@ -38,24 +48,21 @@ export default function AddBikeForm() {
         },
         body: JSON.stringify(bikeData),
       })
-      .then(response=>response.json())
-      .then(response=>{
-        fetch('http://localhost:3000/api/bicycles', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(bikeData),
-        })
-        console.log(response.id)
-      });
+        .then((response) => response.json())
+        .then((response) => {
+          fetch('http://localhost:3000/api/bicycles', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bikeData),
+          });
+          console.log(response.id);
+        });
 
       // if (!response.ok) {
       //   throw new Error('Something went wrong');
       // }
-
-
-
 
       // console.log(data);
     } catch (error) {
@@ -64,59 +71,39 @@ export default function AddBikeForm() {
   };
 
   return (
-    <Container
-    // these properties need to be adjusted once we have an 'App Container' that sets margins top and bottom.
-    sx={{
-      display: 'flex', // Enables flexbox
-      flexDirection: 'column', // Stack children vertically
-      justifyContent: 'center', // Center vertically in the container
-      alignItems: 'center', // Center horizontally in the container
-      height: '100vh', // Full viewport height
-      padding: '0 16px',
-    }}
-    >
+    <>
       <Box
         component="form"
-        sx={{
-              width: '100%', // Use the full width of the container
-          maxWidth: '500px', // Maximum width of the form for larger devices
-          '& .MuiTextField-root': { m: 1, width: '100%' },
-          overflowY: 'auto', // Make it scrollable
-          maxHeight: '90vh', // Maximum height before scrolling
-          padding: '20px', // Padding inside the form
-          boxSizing: 'border-box'
-        }}
-        noValidate
-        autoComplete="off"
+        noValidate={false}
+        autoComplete="on"
+        onSubmit={handleCreateBike}
       >
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-              <Button
+          <Grid item xs={12} sm={12} sx={{textAlign:'center'}}>
+            <Button
               className="photos_url"
               component="label"
               role={undefined}
               variant="contained"
               tabIndex={-1}
               startIcon={<CloudUploadIcon />}
-              >
+            >
               Bike image
-              </Button>
-            </Grid>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="name"
-                id="bike-name"
-                label="Bike's name"
-                placeholder="My bike"
-                value={bikeData.name}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              name="name"
+              id="bike-name"
+              label="Bike's name"
+              placeholder="My bike"
+              value={bikeData.name}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <FormControl fullWidth required>
               <InputLabel id="Owner">Owner</InputLabel>
               <Select
@@ -130,44 +117,44 @@ export default function AddBikeForm() {
                 <MenuItem value="false">No</MenuItem>
               </Select>
             </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="brand"
-                id="bike-brand"
-                label="Brand"
-                placeholder="Trek / Cube"
-                value={bikeData.brand}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="model"
-                id="bike-model-year"
-                label="Model/Year"
-                placeholder="Dual Sport - 2019"
-                value={bikeData.model}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="frame_num"
-                id="frame-number"
-                label="Frame number"
-                placeholder="Your frame number"
-                value={bikeData.frame_num}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              name="brand"
+              id="bike-brand"
+              label="Brand"
+              placeholder="Trek / Cube"
+              value={bikeData.brand}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              name="model"
+              id="bike-model-year"
+              label="Model/Year"
+              placeholder="Dual Sport - 2019"
+              value={bikeData.model}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              name="frame_num"
+              id="frame-number"
+              label="Frame number"
+              placeholder="Your frame number"
+              value={bikeData.frame_num}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <FormControl fullWidth required>
               <InputLabel id="frame-size-label">Frame Size</InputLabel>
               <Select
@@ -185,20 +172,20 @@ export default function AddBikeForm() {
                 <MenuItem value="XL">XL</MenuItem>
               </Select>
             </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="colour"
-                id="bike-colour"
-                label="Colour"
-                placeholder="Colour"
-                value={bikeData.colour}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              name="colour"
+              id="bike-colour"
+              label="Colour"
+              placeholder="Colour"
+              value={bikeData.colour}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <FormControl fullWidth required>
               <InputLabel id="bike-gender-label">Gender</InputLabel>
               <Select
@@ -214,61 +201,59 @@ export default function AddBikeForm() {
                 <MenuItem value="U">Unisex</MenuItem>
               </Select>
             </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="type"
-                id="bike-type"
-                label="Type"
-                placeholder="Type"
-                value={bikeData.type}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="description"
-                id="bike-description"
-                label="Description"
-                placeholder="Description"
-                value={bikeData.description}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="value"
-                id="bike-value"
-                label="Value"
-                placeholder="Value"
-                value={bikeData.value}
-                onChange={handleChange}
-                fullWidth
-                type="number"
-                InputProps={{
-                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
-                  inputProps: {
-                    min: 0,
-                  },
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Button
-              variant='contained'
-              onClick={handleCreateBike}
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              name="type"
+              id="bike-type"
+              label="Type"
+              placeholder="Type"
+              value={bikeData.type}
+              onChange={handleChange}
               fullWidth
-              >Add Bike</Button>
-            </Grid>
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              name="description"
+              id="bike-description"
+              label="Description"
+              placeholder="Description"
+              value={bikeData.description}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              name="value"
+              id="bike-value"
+              label="Value"
+              placeholder="Value"
+              value={bikeData.value}
+              onChange={handleChange}
+              fullWidth
+              type="number"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">$</InputAdornment>
+                ),
+                inputProps: {
+                  min: 0,
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Button variant="contained" fullWidth>
+              Add Bike
+            </Button>
           </Grid>
         </Grid>
-        </Grid>
       </Box>
-    </Container>
+    </>
   );
 }
