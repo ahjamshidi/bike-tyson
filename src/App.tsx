@@ -40,6 +40,7 @@ function App() {
           </AppBar>
           <Container
             maxWidth="sm"
+            sx={{padding:0}}
           >
             <Routes>
               <Route path="/" element={<HomePage />} />
