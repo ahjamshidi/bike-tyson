@@ -1,8 +1,12 @@
 import { APIProvider, Map } from '@vis.gl/react-google-maps';
-import { LoadDataOnMap } from './loadDataOnMap';
-import {ShowMarkersOnMap} from './showMarkersOnMap';
-export function CustomMap() {
-  
+// import { LoadDataOnMap } from './loadDataOnMap';
+// import { ShowMarkersOnMap } from './showMarkersOnMap';
+
+export function CustomMap({
+  children,
+}: {
+  children: React.ReactElement[];
+}): React.ReactElement {
   return (
     <APIProvider apiKey={process.env.GOOGLE_MAPS_API_KEY || ''}>
       <Map
@@ -14,8 +18,8 @@ export function CustomMap() {
         disableDefaultUI={true}
         reuseMaps={true}
       />
-       {/* <ShowMarkersOnMap /> */}
-      <LoadDataOnMap></LoadDataOnMap>
+      {children}
+      {/* <ShowMarkersOnMap /> */}
     </APIProvider>
   );
 }
