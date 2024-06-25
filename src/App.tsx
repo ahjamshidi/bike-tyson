@@ -47,7 +47,6 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/AddBikePage" element={<AddBikePage />} />
               <Route path="/MyBikesPage" element={<MyBikesPage />} />
-              <Route path="/MyBikeCards" element={<BikeCard />} />
             </Routes>
           </Container>
 
