@@ -11,6 +11,7 @@ import { UserReportsPage } from './pages/UserReportsPage.tsx';
 import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { EditUserPage } from './pages/EditUserPage';
+import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
 function App() {
   const defaultTheme = createTheme(themeOptions);
   const handleBackBut = () => {
@@ -51,6 +52,7 @@ function App() {
               <Route path="/MyBikesPage" element={<MyBikesPage />} />
               <Route path="/UserReportsPage" element={<UserReportsPage />} />
               <Route path="/editUser" element={<EditUserPage />} />
+              <Route path="/stolenBikeReport" element={<AddStolenBikeReport />} />
             </Routes>
           </Container>
 
