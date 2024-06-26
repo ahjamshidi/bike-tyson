@@ -1,78 +1,69 @@
-import {
-  Box,
-  Grid,
-  Typography
-} from '@mui/material';
+import { Box, Grid, Typography, useTheme } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import BikeCard from '../bikeCard/bikeCard';
 import { useEffect, useState } from 'react';
-import { ThemeProvider, createTheme } from '@mui/material';
-
+import { CONFIG } from '@/constances/config';
+import { fetchWrapper } from '@/utils/fetchWrapper';
+import { Bicycle } from '@/interfaces/bike';
 export default function MyBikesList() {
-  const [bike, setBike] = useState([]);
-
+  const [bikes, setBike] = useState<Bicycle[]>([]);
+  const theme = useTheme();
   useEffect(() => {
-    // Fetch bike details from the API
-    fetch('http://localhost:3000/api/bicycles')
-      .then(response => response.json())
-      .then(data => {
-        setBike(data);
+    fetchWrapper
+      .get(`${CONFIG.BaseURL}/api/bicycles`)
+      .then((response) => {
+        setBike(response);
       })
-      .catch(error => console.error('Failed to fetch bike details:', error));
+      .catch((error) => console.error('Failed to fetch bikes details:', error));
   }, []);
 
-    // setting color theme
-    const theme = createTheme({
-      palette: {
-        primary: {
-          main: '#FF5722', // Your chosen main color
-        },
-      },
-      components: {
-        MuiFab: {
-          styleOverrides: {
-            root: {
-              backgroundColor: '#FF5722',
-              borderRadius: '20%',
-              '&:hover': {
-                backgroundColor: '#E64A19',
-              },
-            },
-          },
-        },
-      },
-    });
-
-    return (
-      <>
-        <Box component="div">
-          <Grid container sx={{ width: '100%' }} >
-            {/* Here the Action Bike Bar will render */}
-            <Grid item xs={12} sm={12} sx={{ textAlign: 'center', marginBottom:3 }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Typography sx={{ fontSize: 16, marginLeft:'-30%'}} color="text.secondary">
-                  Add, report or edit your bikes.
-                </Typography>
-                <ThemeProvider theme={theme}>
-                  <Link to="/AddBikePage" >
-                    <Fab color="primary" size='medium' style = {{marginRight:'-250%' }}>
-                      <AddIcon />
-                    </Fab>
-                  </Link>
-                </ThemeProvider>
-              </div>
-            </Grid>
-            <Grid container spacing={4}>
-              {bike && bike.map(data => (
-                <Grid item>
-                  <BikeCard BikeData={data} />
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-        </Box>
-      </>
-    )
+  return (
+    <>
+      <Box component="div">
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          sx={{ textAlign: 'center', marginBottom: 3 }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Typography sx={{}} color="text.secondary">
+              Add your new bikes.
+            </Typography>
+            <Link to="/AddBikePage">
+              <Fab
+                size="medium"
+                sx={{
+                  borderRadius: '20%',
+                  backgroundColor: '#fff',
+                  boxShadow: 'none',
+                  color: theme.palette.primary.dark,
+                  border:1,
+                  borderColor: theme.palette.primary.dark,
+                }}
+              >
+                <AddIcon />
+              </Fab>
+            </Link>
+          </div>
+        </Grid>
+        <Grid container rowSpacing={2}>
+          {bikes &&
+            bikes.map((data: Bicycle) => (
+              <Grid item xs={12} key={data.id}>
+                <BikeCard BikeData={data} />
+              </Grid>
+            ))}
+        </Grid>
+      </Box>
+    </>
+  );
 }
