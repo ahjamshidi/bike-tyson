@@ -9,7 +9,7 @@ import { AddBikePage } from './pages/AddBikePage';
 import { MyBikesPage } from './pages/MyBikesPage';
 import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import BikeCard from './components/bikeCard/bikeCard';
+import { EditUserPage } from './pages/EditUserPage';
 function App() {
   const defaultTheme = createTheme(themeOptions);
   const handleBackBut = () => {
@@ -48,6 +48,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/AddBikePage" element={<AddBikePage />} />
               <Route path="/MyBikesPage" element={<MyBikesPage />} />
+              <Route path="/editUser" element={<EditUserPage />} />
             </Routes>
           </Container>
 
