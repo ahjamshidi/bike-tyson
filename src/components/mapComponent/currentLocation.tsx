@@ -1,7 +1,7 @@
 import { Fab, useTheme } from '@mui/material';
 import MyLocationRoundedIcon from '@mui/icons-material/MyLocationRounded';
 import { useMap } from '@vis.gl/react-google-maps';
-export function CurrentLocation() {
+export function CurrentLocation({}) {
   const theme = useTheme();
   const map = useMap();
   const saveUserLocation = (location: { lat: number; lng: number } | null) => {
@@ -51,9 +51,6 @@ export function CurrentLocation() {
       <Fab
         aria-label="add"
         sx={{
-          position: 'absolute',
-          bottom: 140,
-          right: 20,
           backgroundColor: theme.palette.common.white,
         }}
         onClick={() => getUserLocation(saveUserLocation)}
