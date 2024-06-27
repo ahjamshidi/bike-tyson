@@ -219,7 +219,8 @@ const handleDelete = async () => {
                   <InputAdornment position="start">$</InputAdornment>
                 ),
                 inputProps: {
-                  min: 0,
+                  min: "0.00",
+                  step:"0.01"
                 },
               }}
             />
