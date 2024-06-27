@@ -60,7 +60,7 @@ export default function BikeCard({ BikeData }: { BikeData: Bicycle }) {
             variant="outlined"
             size="medium"
             fullWidth
-            onClick={() => navigateToPath(`/EditBikePage/${BikeData.id}`)}
+            onClick={() => navigateToPath('/EditBikePage')}
           >
             Edit
           </Button>
