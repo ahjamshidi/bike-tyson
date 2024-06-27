@@ -10,7 +10,7 @@ export function HomePage() {
       <LoadDataOnMap></LoadDataOnMap>
       <CurrentLocation></CurrentLocation>
       <Fab
-        aria-label="add"
+        aria-label='add'
         sx={{
           position: 'absolute',
           bottom: 70,
