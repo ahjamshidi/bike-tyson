@@ -13,6 +13,8 @@ import {
 } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Bicycle } from '@/interfaces/bike';
+
+
 export default function EditBikeForm() {
   const [bikeData, setBikeData] = useState<Bicycle>({
     user_id: 1,
