@@ -53,15 +53,14 @@ export default function EditBikeForm({ bikeId }:any) {
 //To handle DELETE bike
 const handleDelete = async () => {
   if (!bikeId) return;
-  const bikeIdInt = parseInt(bikeId);
+  const data = { id: parseInt(bikeId) };
   try {
-    await fetchWrapper._delete(`${CONFIG.BaseURL}/api/bicycles/${bikeIdInt}`);
+    await fetchWrapper.delete(`${CONFIG.BaseURL}/api/bicycles/`, data);
     alert('Bike deleted successfully!');
   } catch (error) {
     console.error('Failed to delete bike:', error);
   }
 };
-
 
   return (
     <>
