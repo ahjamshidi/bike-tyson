@@ -7,6 +7,7 @@ import AppBottomNavigation from '@/components/appBottomNavigation/AppBottomNavig
 import { themeOptions } from './constances/theme';
 import { AddBikePage } from './pages/AddBikePage';
 import { MyBikesPage } from './pages/MyBikesPage';
+import { UserReportsPage } from './pages/UserReportsPage.tsx';
 import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { EditUserPage } from './pages/EditUserPage';
@@ -48,12 +49,13 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/AddBikePage" element={<AddBikePage />} />
               <Route path="/MyBikesPage" element={<MyBikesPage />} />
+              <Route path="/UserReportsPage" element={<UserReportsPage />} />
               <Route path="/editUser" element={<EditUserPage />} />
             </Routes>
           </Container>
 
           <AppBottomNavigation></AppBottomNavigation>
-        </Box>
+        </Box>ˆ
       </ThemeProvider>
     </>
   );
