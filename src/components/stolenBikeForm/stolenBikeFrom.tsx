@@ -18,7 +18,6 @@ import useModal from '@/hooks/useModal';
 import { CurrentLocation } from '../mapComponent/currentLocation';
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
 import { MapCameraChangedEvent } from '@vis.gl/react-google-maps';
-import { UserReport } from '@/interfaces/userReport';
 import { Dayjs } from 'dayjs';
 import { fetchWrapper } from '@/utils/fetchWrapper';
 import { CONFIG } from '@/constances/config';
@@ -61,7 +60,7 @@ export function StolenBikeForm() {
       setBikeList(response);
     });
   }, []);
-  const validate = (name: string, value: string) => {
+  const validate = (name: string, value: any) => {
     let error = '';
     if (name === 'bike_id' && Number(value) === 0) {
       error = 'Name is required';
@@ -73,7 +72,7 @@ export function StolenBikeForm() {
     }
     setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
   };
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
 
