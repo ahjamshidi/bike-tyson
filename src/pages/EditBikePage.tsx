@@ -1,8 +1,14 @@
 import EditBikeForm from '@/components/editBikeForm/EditBikeForm';
 import { Box } from '@mui/material';
+import { useParams } from 'react-router-dom';
+
 
 
 export function EditBikePage () {
+
+  // Extracting `id` from the URL
+  const {id} = useParams();
+
   return (
     <Box sx={{
       width: '100%',
@@ -14,7 +20,8 @@ export function EditBikePage () {
       mt: 8,
       pb: 7,
     }}>
-      <EditBikeForm></EditBikeForm>
+      <EditBikeForm bikeId={id}></EditBikeForm>
+
     </Box>
   );
 }

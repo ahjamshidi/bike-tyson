@@ -50,7 +50,7 @@ function App() {
               <Route path="/AddBikePage" element={<AddBikePage />} />
               <Route path="/MyBikesPage" element={<MyBikesPage />} />
               <Route path="/editUser" element={<EditUserPage />} />
-              <Route path="/EditBikePage" element={<EditBikePage />} />
+              <Route path="/EditBikePage/:id" element={<EditBikePage />} />
             </Routes>
           </Container>
 
