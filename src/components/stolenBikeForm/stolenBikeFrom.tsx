@@ -4,16 +4,9 @@ import {
   TextField,
   Button,
   Grid,
-  InputAdornment,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
   Typography,
   useTheme,
 } from '@mui/material';
-import { Modal as BaseModal } from '@mui/base/Modal';
-import { styled, css } from '@mui/system';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -23,10 +16,22 @@ import { CustomMap } from '../mapComponent/customMap';
 import CustomModal from '../modal/customModal';
 import useModal from '@/hooks/useModal';
 import { CurrentLocation } from '../mapComponent/currentLocation';
+import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
+import { MapCameraChangedEvent } from '@vis.gl/react-google-maps';
+import { useForm, SubmitHandler } from "react-hook-form"
+
+interface StolenBikeFormInputs{
+
+}
 export function StolenBikeForm() {
   const theme = useTheme();
   const { isOpen, openModal, closeModal } = useModal();
-
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<StolenBikeFormInputs>()
   const bikeList = [
     {
       name: 'Mountain Bike',
@@ -56,7 +61,9 @@ export function StolenBikeForm() {
         'https://img.freepik.com/free-photo/white-bicycle-standing-park-morning-fitness-loneliness_1153-6768.jpg',
     },
   ];
-
+  const getMarkerLocation = (ev: MapCameraChangedEvent) => {
+    console.log(ev.detail.center);
+  };
   return (
     <>
       <Typography sx={{ mt: 2, mb: 2, color: theme.palette.text.secondary }}>
@@ -70,16 +77,25 @@ export function StolenBikeForm() {
           <Grid item xs={12} sm={12} sx={{ textAlign: 'center' }}>
             <BikeSelector bikes={bikeList}></BikeSelector>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Grid item xs={12} sm={6}>
               <DateTimePicker
-                label="Choose Date and Time"
+                label="Last Time See Your Bike"
+                sx={{ width: '100%' }}
+                name='start'
+                defaultValue={dayjs()}
+                maxDateTime={dayjs().set('hour', dayjs().hour()).endOf('hour')}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <DateTimePicker
+                label="Notice Bike Was Stolen"
                 sx={{ width: '100%' }}
                 defaultValue={dayjs()}
                 maxDateTime={dayjs().set('hour', dayjs().hour()).endOf('hour')}
               />
-            </LocalizationProvider>
-          </Grid>
+            </Grid>
+          </LocalizationProvider>
           <Grid item xs={12} sm={6}>
             <Button variant="contained" color="primary" onClick={openModal}>
               select location
@@ -101,16 +117,35 @@ export function StolenBikeForm() {
           </Grid>
         </Grid>
 
-        <CustomModal isOpen={isOpen} closeModal={closeModal}>
-        <h2 id="unstyled-modal-title" className="modal-title">
-            Text in a modal
-          </h2>
-          <p id="unstyled-modal-description" className="modal-description">
-            Aliquid amet deserunt earum!
-          </p>
-          {/* <CustomMap>
-            <CurrentLocation></CurrentLocation>
-          </CustomMap> */}
+        <CustomModal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          modalTitle="Choos location on map"
+          modalCloseElement={<span onClick={closeModal}>OK</span>}
+        >
+          <CustomMap
+            defaultCenter={{ lat: 52.52, lng: 13.405 }}
+            handleCenterChanged={getMarkerLocation}
+          >
+            <Box
+              sx={{
+                position: 'absolute',
+                bottom: 'calc(50% - 30px)',
+                right: 'calc(50% - 30px)',
+              }}
+            >
+              <LocationOnRoundedIcon
+                sx={{
+                  width: 60,
+                  height: 60,
+                  color: theme.palette.primary.dark,
+                }}
+              />
+            </Box>
+            <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
+              <CurrentLocation></CurrentLocation>
+            </Box>
+          </CustomMap>
         </CustomModal>
       </Box>
     </>

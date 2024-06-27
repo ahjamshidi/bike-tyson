@@ -3,15 +3,20 @@ import { styled, css } from '@mui/system';
 import Fade from '@mui/material/Fade';
 import { Modal as BaseModal, Box } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import Divider from '@mui/material/Divider';
 interface ModalComponentProps {
   isOpen: boolean;
   closeModal: () => void;
+  modalTitle: string;
+  modalCloseElement: any;
   children: any;
 }
 
 export default function CustomModal({
   isOpen,
   closeModal,
+  modalTitle = '',
+  modalCloseElement = <CloseRoundedIcon onClick={closeModal} />,
   children,
 }: ModalComponentProps): any {
   return (
@@ -26,14 +31,22 @@ export default function CustomModal({
       >
         <Fade in={isOpen}>
           <ModalContent>
-            <Box component="div" sx={{ width: '100%',display:'flex',justifyContent:'space-between' }}>
-              {/* <div> */}
-                <span>  title</span>
+            <Box
+              component="div"
+              sx={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'space-between',
+                px: 2,
+                pt: 2,
+              }}
+            >
+              <span className="modal-title"> {modalTitle}</span>
 
-              <CloseRoundedIcon />
-              {/* </div> */}
+             {modalCloseElement}
             </Box>
-            <Box component="div" sx={{ width: '100%' }}>
+            <Divider component="div" />
+            <Box component="div" sx={{ width: '100%', p: 0, height: '100%' }}>
               {children}
             </Box>
           </ModalContent>
@@ -78,7 +91,7 @@ const Modal = styled(BaseModal)`
   z-index: 1300;
   inset: 0;
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: center;
 `;
 
@@ -92,7 +105,8 @@ const StyledBackdrop = styled(Backdrop)`
 
 const ModalContent = styled('div')(
   ({ theme }) => css`
-    font-family: 'IBM Plex Sans', sans-serif;
+    width: 100%;
+    height: 80%;
     font-weight: 500;
     text-align: start;
     position: relative;
@@ -105,7 +119,7 @@ const ModalContent = styled('div')(
     border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
     box-shadow: 0 4px 12px
       ${theme.palette.mode === 'dark' ? 'rgb(0 0 0 / 0.5)' : 'rgb(0 0 0 / 0.2)'};
-    padding: 24px;
+    padding: 0px;
     color: ${theme.palette.mode === 'dark' ? grey[50] : grey[900]};
 
     & .modal-title {
