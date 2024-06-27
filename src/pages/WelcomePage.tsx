@@ -17,7 +17,12 @@ const WelcomePage: React.FC = () => {
 
   const handleVisitApp = () => {
     localStorage.setItem('isVisited', 'true');
-    navigate('/', { replace: true });
+    window.location.reload();
+  };
+
+  const handleLoginPage = () => {
+    localStorage.setItem('isVisited', 'false');
+    navigate('/login');
   };
 
   return (
@@ -110,6 +115,7 @@ const WelcomePage: React.FC = () => {
               width: '150px',
               height: '50px',
             }}
+            onClick={handleLoginPage}
           >
             Login
           </Button>

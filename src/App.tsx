@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import { HomePage } from '@/pages/HomePage';
 import AppBottomNavigation from '@/components/appBottomNavigation/AppBottomNavigation';
+import WelcomePage from './pages/WelcomePage';
+import LoginPage from './pages/LoginPage';
 import { AddBikePage } from './pages/AddBikePage';
 import { MyBikesPage } from './pages/MyBikesPage';
 import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import WelcomePage from './pages/WelcomePage';
 
 const App: React.FC = () => {
   const [isVisited, setIsVisited] = useState<boolean>(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const visited = localStorage.getItem('isVisited') === 'true';
     setIsVisited(visited);
-    if (!visited) {
-      navigate('/welcome', { replace: true });
+    if (!visited && location.pathname !== '/login') {
+      navigate('/', { replace: true });
     }
   }, [navigate]);
 
@@ -62,7 +64,8 @@ const App: React.FC = () => {
         )}
         {!isVisited && (
           <Routes>
-            <Route path='/welcome' element={<WelcomePage />} />
+            <Route path='/' element={<WelcomePage />} />
+            <Route path='/login' element={<LoginPage />} />
           </Routes>
         )}
       </Box>
