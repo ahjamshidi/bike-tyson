@@ -250,9 +250,22 @@ export default function EditBikeForm() {
             />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <Button variant="contained" fullWidth>
-              Add Bike
-            </Button>
+          <Button
+            variant="outlined"
+            size="medium"
+            fullWidth
+            onClick={() => navigateToPath('/')}
+          >
+            Delete Bike
+          </Button>
+          <Button
+            size="medium"
+            variant="contained"
+            fullWidth
+            onClick={() => navigateToPath('/')}
+          >
+            Edit Bike
+          </Button>
           </Grid>
         </Grid>
       </Box>
