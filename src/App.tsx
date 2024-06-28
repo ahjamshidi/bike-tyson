@@ -12,6 +12,7 @@ import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import RegisterPage from './pages/RegisterPage';
 import { EditUserPage } from './pages/EditUserPage';
+import {UserReportsDetailPage} from "@/pages/UserReportsDetailPage.tsx";
 import { EditBikePage } from './pages/EditBikePage';
 import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
 const App: React.FC = () => {
@@ -36,7 +37,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <>
+    <>q
       <Box
         sx={{
           display: 'flex',
@@ -66,6 +67,7 @@ const App: React.FC = () => {
                 <Route path="/AddBikePage" element={<AddBikePage />} />
                 <Route path="/MyBikesPage" element={<MyBikesPage />} />
                 <Route path="/UserReportsPage" element={<UserReportsPage />} />
+                 <Route path="/details/:id" element={<UserReportsDetailPage />} />
                 <Route path="/editUser" element={<EditUserPage />} />
                 <Route path="/EditBikePage/:id" element={<EditBikePage />} />
                 <Route

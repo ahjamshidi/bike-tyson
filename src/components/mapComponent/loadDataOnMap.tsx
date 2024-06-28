@@ -7,6 +7,7 @@ import { NumericFormat } from 'react-number-format';
 import { InfoWindowContent, PoliceReportList } from '@/interfaces/policeReport';
 const WHITE_COLOR_RGB: [number, number, number] = [255, 255, 255];
 const ORANG_COLOR_RGB: [number, number, number] = [255, 87, 34];
+
 export function LoadDataOnMap() {
   const map = useMap();
   const latLong: any = { lat: 52.52, lng: 13.405 };
