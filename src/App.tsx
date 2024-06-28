@@ -69,7 +69,6 @@ const App: React.FC = () => {
                   <Route path="/MyBikesPage" element={<MyBikesPage />} />
                   <Route path="/UserReportPage" element={<UserReportPage />} />
                   <Route path="/UserReportPage/:id" element={<UserReportDetailPage />} />
-                  <Route path="/UserReportBikeFoundPage/:id" element={<UserReportBikeFoundPage/>} />
                   <Route path="/editUser" element={<EditUserPage />} />
                   <Route path="/EditBikePage/:id" element={<EditBikePage />} />
                   <Route path="/stolenBikeReport" element={<AddStolenBikeReport />}

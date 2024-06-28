@@ -5,7 +5,7 @@ import {
     Card,
     CardContent,
     Typography,
-    Button,
+    // Button,
 } from '@mui/material';
 import { UserReport } from "@/interfaces/userReport.ts";
 import { format, isYesterday } from 'date-fns';
@@ -43,7 +43,7 @@ const UserReportDetailPage = () => {
     const location = useLocation();
     const { UserReportData } = location.state as { UserReportData: UserReport };
     const coordinates = extractCoordinates(UserReportData.gps);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     return (
 
