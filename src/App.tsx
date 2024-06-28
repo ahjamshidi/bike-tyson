@@ -13,7 +13,7 @@ import ForgotPassword from './pages/ForgotPassword.tsx';
 import ResetCode from './pages/ResetCode';
 import UpdatePassword from './pages/UpdatePassword';
 import { EditUserPage } from './pages/EditUserPage';
-import UserReportDetailPage from '@/pages/UserReportDetailPage.tsx';
+import { UserReportsDetailPage } from '@/pages/UserReportsDetailPage.tsx';
 import { EditBikePage } from './pages/EditBikePage';
 import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
 import ProfilePage from './pages/ProfilePage.tsx';
@@ -44,6 +44,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      q
       <Box
         sx={{
           display: 'flex',
