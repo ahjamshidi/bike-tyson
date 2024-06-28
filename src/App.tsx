@@ -79,10 +79,6 @@ const App: React.FC = () => {
                   path='/UserReportPage/:id'
                   element={<UserReportDetailPage />}
                 />
-                <Route
-                  path='/UserReportBikeFoundPage/:id'
-                  element={<UserReportBikeFoundPage />}
-                />
                 <Route path='/editUser' element={<EditUserPage />} />
                 <Route path='/EditBikePage/:id' element={<EditBikePage />} />
                 <Route

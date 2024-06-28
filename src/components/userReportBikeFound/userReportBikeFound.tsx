@@ -5,14 +5,11 @@ import {
     Card,
     CardContent,
     Typography,
-    Button, Box,
+    Button,
 } from '@mui/material';
 import { UserReport } from "@/interfaces/userReport.ts";
 import { format, isYesterday } from 'date-fns';
 import {CONFIG} from "@/constances/config.ts";
-import {CustomMap} from "@/components/mapComponent/customMap.tsx";
-import {Marker} from "@vis.gl/react-google-maps";
-import GeolocationComponent from "@/components/GeoLocation/GeoLocation.tsx";
 
 
 interface DateDisplayProps {
