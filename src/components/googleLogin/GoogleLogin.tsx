@@ -6,7 +6,11 @@ import { CONFIG } from '@/constances/config';
 
 const GoogleLoginComponent: React.FC = () => {
   const clientId = process.env.GOOGLE_CLIENT_ID || '';
+<<<<<<< HEAD
 
+=======
+  console.log(clientId);
+>>>>>>> 0d8eb59 (fix login button)
   const navigate = useNavigate();
 
   const onSuccess = async (response: any) => {
@@ -49,7 +53,7 @@ const GoogleLoginComponent: React.FC = () => {
         width={'100%'}
         bgcolor="background.paper"
       >
-        <GoogleOAuthProvider clientId={clientId.trim()}>
+        <GoogleOAuthProvider clientId={clientId}>
           <GoogleLogin
             onSuccess={onSuccess}
             onError={onFailure}

@@ -6,26 +6,16 @@ import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import { AddBikePage } from './pages/AddBikePage';
 import { MyBikesPage } from './pages/MyBikesPage';
-
-import  UserReportPage  from './pages/UserReportPage';
-import {
-  AppBar,
-  Box,
-  Container,
-  IconButton,
-  Toolbar,
-  Typography,
-} from '@mui/material';
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import UserReportPage from './pages/UserReportPage';
+import { Box } from '@mui/material';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPassword from './pages/ForgotPassword.tsx';
 import ResetCode from './pages/ResetCode';
 import UpdatePassword from './pages/UpdatePassword';
 import { EditUserPage } from './pages/EditUserPage';
-import { UserReportDetailPage } from '@/pages/UserReportDetailPage.tsx';
+import UserReportDetailPage from '@/pages/UserReportDetailPage.tsx';
 import { EditBikePage } from './pages/EditBikePage';
 import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
-import UserReportBikeFoundPage from '@/pages/UserReportBikeFoundPage.tsx';
 import ProfilePage from './pages/ProfilePage.tsx';
 import { MainLayout } from './mainLayout.tsx';
 import { WelcomeLayout } from './welcomeLayout.tsx';
