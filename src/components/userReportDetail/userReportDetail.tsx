@@ -4,15 +4,14 @@ import {
     Grid,
     Card,
     CardContent,
-    Typography, Fab, useTheme,
+    Typography, Fab, useTheme, Button,
 } from '@mui/material';
 import { UserReport } from "@/interfaces/userReport.ts";
 import { format, isYesterday } from 'date-fns';
 import {CONFIG} from "@/constances/config.ts";
 import {CustomMap} from "@/components/mapComponent/customMap.tsx";
-import {LoadDataOnMap} from "@/components/mapComponent/loadDataOnMap.tsx";
-import {CurrentLocation} from "@/components/mapComponent/currentLocation.tsx";
-import AddIcon from "@mui/icons-material/Add";
+import {Marker} from "@vis.gl/react-google-maps";
+
 
 interface DateDisplayProps {
     date: Date;
@@ -26,13 +25,34 @@ const DateDisplay: React.FC<DateDisplayProps> = ({ date }) => {
     }
 }
 
+const extractCoordinates = (inputString: string): { latitude: number, longitude: number } | null => {
+    const regex = /Latitude: (\d+\.\d+), Longitude: (\d+\.\d+)/;
+    const match = inputString.match(regex);
+
+    if (match) {
+        const latitude = parseFloat(match[1]);
+        const longitude = parseFloat(match[2]);
+        return { latitude, longitude };
+    } else {
+        return null;
+    }
+};
+
 const UserReportDetailPage = () => {
     const location = useLocation();
     const { UserReportData } = location.state as { UserReportData: UserReport };
-    const theme = useTheme();
+    const coordinates = extractCoordinates(UserReportData.gps);
+
 
     return (
-        <Card sx={{ minWidth: 275 }}>
+
+        <>
+            <div style={{width: '100%',height:'300px', marginBottom:'16px'}}>
+                <CustomMap defaultCenter={{lat: coordinates?.latitude, lng: coordinates?.longitude}}>
+                    <Marker position={{lat: coordinates?.latitude, lng: coordinates?.longitude}} />
+                </CustomMap>
+            </div>
+        <Card sx={{minWidth: 275}}>
             <CardContent>
                 <Grid container columnSpacing={2}>
                     <Grid item xs={4}>
@@ -45,41 +65,35 @@ const UserReportDetailPage = () => {
                             }`}
                             src={`${UserReportData.bicycle.photos_url[0]}`}
                             alt={`${UserReportData.bicycle.brand} ${UserReportData.bicycle.model}`}
-                            loading="lazy"
-                        />
+                                loading="lazy"
+                            />
+                        </Grid>
+                        <Grid item xs={8}>
+                            <Typography variant="h6" component="div">
+                                {`${UserReportData.bicycle.brand} ${UserReportData.bicycle.model}`}
+                            </Typography>
+                            <Typography variant="subtitle2" color="text.secondary">
+                                Frame number: {UserReportData.bicycle.frame_num}
+                            </Typography>
+                            <Typography variant="subtitle2" color="text.secondary">
+                                Bike colour: {UserReportData.bicycle.colour}
+                            </Typography>
+                            <Typography variant="subtitle2" color="text.secondary">
+                                {<DateDisplay date={new Date(UserReportData.created_at)} />}
+                            </Typography>
+                            <Typography variant="subtitle2" color="text.secondary">
+                                Description: {UserReportData.description}
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={8}>
-                        <Typography variant="h6" component="div">
-                            {`${UserReportData.bicycle.brand} ${UserReportData.bicycle.model}`}
-                        </Typography>
-                        <Typography variant="subtitle2" color="text.secondary">
-                            Frame number: {UserReportData.bicycle.frame_num}
-                        </Typography>
-                        <Typography variant="subtitle2" color="text.secondary">
-                            Bike colour: {UserReportData.bicycle.colour}
-                        </Typography>
-                        <Typography variant="subtitle2" color="text.secondary">
-                            {<DateDisplay date={new Date(UserReportData.created_at)} />}
-                        </Typography>
-                    </Grid>
-                </Grid>
-            </CardContent>
-            <CustomMap>
-                <LoadDataOnMap></LoadDataOnMap>
-                <CurrentLocation></CurrentLocation>
-                <Fab
-                    aria-label="add"
-                    sx={{
-                        position: 'absolute',
-                        bottom: 70,
-                        right: 20,
-                        backgroundColor: theme.palette.primary.dark,
-                    }}
-                >
-                    <AddIcon sx={{ color: 'black' }} />
-                </Fab>
-            </CustomMap>
-        </Card>
+                </CardContent>
+            </Card>
+            <Grid item xs={12} sm={12} style={{marginTop:'16px'}}>
+                <Button variant="contained" fullWidth>
+                    Report Found
+                </Button>
+            </Grid>
+        </>
     );
 }
 
