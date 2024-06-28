@@ -17,6 +17,7 @@ import { EditUserPage } from './pages/EditUserPage';
 import { UserReportDetailPage } from '@/pages/UserReportDetailPage.tsx';
 import { EditBikePage } from './pages/EditBikePage';
 import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
+import UserReportBikeFoundPage from '@/pages/UserReportBikeFoundPage.tsx';
 import ProfilePage from './pages/ProfilePage.tsx';
 import { MainLayout } from './mainLayout.tsx';
 import { WelcomeLayout } from './welcomeLayout.tsx';
