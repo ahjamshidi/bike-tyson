@@ -1,18 +1,32 @@
 import React from 'react';
+<<<<<<< HEAD
 import {useLocation, useNavigate} from 'react-router-dom';
+=======
+import { useLocation } from 'react-router-dom';
+>>>>>>> 6e1f832 (User Report Detail Page)
 import {
     Grid,
     Card,
     CardContent,
+<<<<<<< HEAD
     Typography,
     // Button,
+=======
+    Typography, Fab, useTheme,
+>>>>>>> 6e1f832 (User Report Detail Page)
 } from '@mui/material';
 import { UserReport } from "@/interfaces/userReport.ts";
 import { format, isYesterday } from 'date-fns';
 import {CONFIG} from "@/constances/config.ts";
 import {CustomMap} from "@/components/mapComponent/customMap.tsx";
+<<<<<<< HEAD
 import {Marker} from "@vis.gl/react-google-maps";
 
+=======
+import {LoadDataOnMap} from "@/components/mapComponent/loadDataOnMap.tsx";
+import {CurrentLocation} from "@/components/mapComponent/currentLocation.tsx";
+import AddIcon from "@mui/icons-material/Add";
+>>>>>>> 6e1f832 (User Report Detail Page)
 
 interface DateDisplayProps {
     date: Date;
