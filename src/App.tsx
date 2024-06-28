@@ -9,6 +9,7 @@ import { AddBikePage } from './pages/AddBikePage';
 import { MyBikesPage } from './pages/MyBikesPage';
 import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import RegisterPage from './pages/RegisterPage';
 
 const App: React.FC = () => {
   const [isVisited, setIsVisited] = useState<boolean>(false);
@@ -18,7 +19,11 @@ const App: React.FC = () => {
   useEffect(() => {
     const visited = localStorage.getItem('isVisited') === 'true';
     setIsVisited(visited);
-    if (!visited && location.pathname !== '/login') {
+    if (
+      !visited &&
+      location.pathname !== '/login' &&
+      location.pathname !== '/register'
+    ) {
       navigate('/', { replace: true });
     }
   }, [navigate]);
@@ -66,6 +71,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path='/' element={<WelcomePage />} />
             <Route path='/login' element={<LoginPage />} />
+            <Route path='/register' element={<RegisterPage />} />
           </Routes>
         )}
       </Box>
