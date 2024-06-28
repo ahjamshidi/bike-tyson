@@ -66,6 +66,13 @@ const LoginForm: React.FC = () => {
     navigate('/register');
   };
 
+  const handleForgotPassword = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    navigate('/forgot-password');
+  };
+
   return (
     <>
       <Box
@@ -111,7 +118,12 @@ const LoginForm: React.FC = () => {
             ),
           }}
         />
-        <Link href='#' variant='body2' sx={{ alignSelf: 'flex-end', mb: 2 }}>
+        <Link
+          href='#'
+          variant='body2'
+          sx={{ alignSelf: 'flex-end', mb: 2 }}
+          onClick={handleForgotPassword}
+        >
           Forgot password?
         </Link>
         <Button
