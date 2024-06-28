@@ -3,6 +3,7 @@ export interface TheftByDay {
   count: number;
 }
 export interface PoliceReport {
+  id:number;
   lor_code: string;
   num_thefts: number;
   theft_percentage: number;
