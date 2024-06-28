@@ -17,7 +17,7 @@ const WelcomePage: React.FC = () => {
 
   const handleVisitApp = () => {
     localStorage.setItem('isVisited', 'true');
-    window.location.reload();
+    window.location.replace('/');
   };
 
   const handleLoginPage = () => {
@@ -27,39 +27,39 @@ const WelcomePage: React.FC = () => {
 
   return (
     <Box
-      display='flex'
-      flexDirection='column'
-      alignItems='center'
-      justifyContent='flex-end'
-      height='100vh'
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="flex-end"
+      height="100vh"
       bgcolor={theme.palette.primary.dark}
     >
       <Box
-        display='flex'
-        justifyContent='center'
-        alignItems='center'
-        bgcolor='tranparent'
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        bgcolor="tranparent"
         borderRadius={2}
         p={4}
       >
         <img
-          src='./../../public/welcome_bike.png'
-          alt='logo'
+          src="/welcome_bike.png"
+          alt="logo"
           style={{ maxHeight: '200px', marginBottom: '20px' }}
         />
       </Box>
       <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        bgcolor='white'
-        width='100%'
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        bgcolor="white"
+        width="100%"
         borderRadius={2}
         p={4}
         mt={2}
       >
         <Typography
-          variant='h5'
+          variant="h5"
           gutterBottom
           sx={{
             fontWeight: 'bold',
@@ -71,7 +71,7 @@ const WelcomePage: React.FC = () => {
           <ListItem sx={{ padding: '4px 0' }}>
             <ListItemText
               primary={
-                <Typography variant='body2' sx={{ fontSize: '0.875rem' }}>
+                <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
                   • Report bike thefts to the community
                 </Typography>
               }
@@ -80,7 +80,7 @@ const WelcomePage: React.FC = () => {
           <ListItem sx={{ padding: '4px 0' }}>
             <ListItemText
               primary={
-                <Typography variant='body2' sx={{ fontSize: '0.875rem' }}>
+                <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
                   • See risky areas in Berlin for your parked bike
                 </Typography>
               }
@@ -89,7 +89,7 @@ const WelcomePage: React.FC = () => {
           <ListItem sx={{ padding: '4px 0' }}>
             <ListItemText
               primary={
-                <Typography variant='body2' sx={{ fontSize: '0.875rem' }}>
+                <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
                   • Report when bikes are found
                 </Typography>
               }
@@ -98,7 +98,7 @@ const WelcomePage: React.FC = () => {
           <ListItem sx={{ padding: '4px 0' }}>
             <ListItemText
               primary={
-                <Typography variant='body2' sx={{ fontSize: '0.875rem' }}>
+                <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
                   • Interesting information for bike lovers
                 </Typography>
               }
@@ -108,7 +108,7 @@ const WelcomePage: React.FC = () => {
         <Divider sx={{ width: '100%', my: 2 }}>Start Here</Divider>
         <Box mt={2}>
           <Button
-            variant='contained'
+            variant="contained"
             sx={{
               backgroundColor: theme.palette.primary.dark,
               marginRight: '10px',
@@ -120,7 +120,7 @@ const WelcomePage: React.FC = () => {
             Login
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             sx={{
               backgroundColor: 'black',
               width: '150px',

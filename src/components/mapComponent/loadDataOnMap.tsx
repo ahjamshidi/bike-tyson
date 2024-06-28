@@ -40,7 +40,6 @@ export function LoadDataOnMap() {
         './berlin-lor.geojson',
         { idPropertyName: 'PLR_ID' },
         (a) => {
-          console.log(a);
           isGeoJsonLoaded.current = true;
         }
       );
