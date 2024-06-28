@@ -2,7 +2,7 @@ import UserReportsList from '@/components/userReportsList/userReportsList.tsx';
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
 
-export function UserReportsPage({
+export default function UserReportPage({
   pageTitleHandler,
 }: {
   pageTitleHandler: React.Dispatch<React.SetStateAction<string>>;

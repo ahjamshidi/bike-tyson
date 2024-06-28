@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import UserReportDetail from "@/components/userReportDetail/userReportDetail.tsx";
 
 
-export function UserReportDetailPage () {
+export default function UserReportDetailPage () {
     return (
         <Box sx={{
             width: '100%',

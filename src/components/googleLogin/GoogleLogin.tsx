@@ -6,6 +6,7 @@ import { CONFIG } from '@/constances/config';
 
 const GoogleLoginComponent: React.FC = () => {
   const clientId = process.env.GOOGLE_CLIENT_ID || '';
+  console.log(clientId);
   const navigate = useNavigate();
 
   const onSuccess = async (response: any) => {
@@ -40,15 +41,23 @@ const GoogleLoginComponent: React.FC = () => {
   return (
     <>
       <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        justifyContent='center'
-        p={2}
-        bgcolor='background.paper'
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        p={0}
+        width={'100%'}
+        bgcolor="background.paper"
       >
         <GoogleOAuthProvider clientId={clientId}>
-          <GoogleLogin onSuccess={onSuccess} onError={onFailure} />
+          <GoogleLogin
+            onSuccess={onSuccess}
+            onError={onFailure}
+            width={'100%'}
+            containerProps={{
+              style: { width: '100%'},
+            }}
+          />
         </GoogleOAuthProvider>
       </Box>
     </>

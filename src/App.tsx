@@ -6,24 +6,14 @@ import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import { AddBikePage } from './pages/AddBikePage';
 import { MyBikesPage } from './pages/MyBikesPage';
-import { UserReportPage } from './pages/UserReportPage.tsx';
-import {
-  AppBar,
-  Box,
-  Container,
-  IconButton,
-  Toolbar,
-  Typography,
-} from '@mui/material';
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import UserReportPage from './pages/UserReportPage';
+import { Box } from '@mui/material';
 import RegisterPage from './pages/RegisterPage';
 import { EditUserPage } from './pages/EditUserPage';
-import { UserReportDetailPage } from '@/pages/UserReportDetailPage.tsx';
+import UserReportDetailPage from '@/pages/UserReportDetailPage.tsx';
 import { EditBikePage } from './pages/EditBikePage';
 import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
-import UserReportBikeFoundPage from '@/pages/UserReportBikeFoundPage.tsx';
 import ProfilePage from './pages/ProfilePage.tsx';
-import { CONFIG } from './constances/config.ts';
 import { MainLayout } from './mainLayout.tsx';
 import { WelcomeLayout } from './welcomeLayout.tsx';
 
@@ -54,7 +44,6 @@ const App: React.FC = () => {
 
   return (
     <>
-      q
       <Box
         sx={{
           display: 'flex',
@@ -80,9 +69,14 @@ const App: React.FC = () => {
                 element={<UserReportPage pageTitleHandler={setPageTitle} />}
               />
               <Route
+                path="/UserReportPage/:id"
+                element={<UserReportDetailPage />}
+              />
+              <Route
                 path="/editUser"
                 element={<EditUserPage pageTitleHandler={setPageTitle} />}
               />
+              <Route path="/profile" element={<ProfilePage />} />
               <Route
                 path="/EditBikePage/:id"
                 element={<EditBikePage pageTitleHandler={setPageTitle} />}

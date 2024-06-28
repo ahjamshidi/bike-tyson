@@ -40,7 +40,7 @@ export default function AppBottomNavigation() {
         <BottomNavigationAction
           label="Profile"
           icon={<AccountCircleRoundedIcon />}
-          value={'/editUser'}
+          value={'/profile'}
         />
       </BottomNavigation>
     </Box>
