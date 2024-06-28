@@ -6,8 +6,16 @@ import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import { AddBikePage } from './pages/AddBikePage';
 import { MyBikesPage } from './pages/MyBikesPage';
-import { UserReportPage } from './pages/UserReportPage.tsx';
-import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
+
+import  UserReportPage  from './pages/UserReportPage';
+import {
+  AppBar,
+  Box,
+  Container,
+  IconButton,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPassword from './pages/ForgotPassword.tsx';
@@ -28,6 +36,12 @@ const App: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
+    if (!CONFIG.MainPages.includes(location.pathname)) {
+      console.log(showBack);
+      setShowBack(true);
+    } else {
+      setShowBack(false);
+    }
     const visited = localStorage.getItem('isVisited') === 'true';
     if (visited && location.pathname === '/welcome') {
       navigate('/', { replace: true });
@@ -42,7 +56,7 @@ const App: React.FC = () => {
     ) {
       navigate('/welcome', { replace: true });
     }
-  }, [navigate]);
+  }, [location]);
 
   return (
     <>
