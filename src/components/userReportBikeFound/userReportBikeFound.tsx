@@ -5,7 +5,7 @@ import {
     Card,
     CardContent,
     Typography,
-    Button, Box,
+    Button,
 } from '@mui/material';
 import { UserReport } from "@/interfaces/userReport.ts";
 import { format, isYesterday } from 'date-fns';
