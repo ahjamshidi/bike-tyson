@@ -36,12 +36,6 @@ const App: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (!CONFIG.MainPages.includes(location.pathname)) {
-      console.log(showBack);
-      setShowBack(true);
-    } else {
-      setShowBack(false);
-    }
     const visited = localStorage.getItem('isVisited') === 'true';
     if (visited && location.pathname === '/welcome') {
       navigate('/', { replace: true });
@@ -56,7 +50,7 @@ const App: React.FC = () => {
     ) {
       navigate('/welcome', { replace: true });
     }
-  }, [location]);
+  }, [navigate]);
 
   return (
     <>
