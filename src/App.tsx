@@ -12,6 +12,7 @@ import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import RegisterPage from './pages/RegisterPage';
 import { EditUserPage } from './pages/EditUserPage';
+import { EditBikePage } from './pages/EditBikePage';
 import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
 const App: React.FC = () => {
   const [isVisited, setIsVisited] = useState<boolean>(false);
@@ -66,6 +67,7 @@ const App: React.FC = () => {
                 <Route path="/MyBikesPage" element={<MyBikesPage />} />
                 <Route path="/UserReportsPage" element={<UserReportsPage />} />
                 <Route path="/editUser" element={<EditUserPage />} />
+                <Route path="/EditBikePage/:id" element={<EditBikePage />} />
                 <Route
                   path="/stolenBikeReport"
                   element={<AddStolenBikeReport />}

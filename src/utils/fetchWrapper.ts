@@ -29,13 +29,15 @@ function put(url:string, body:Object) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
   };
-  return fetch(url, requestOptions).then(handleResponse);    
+  return fetch(url, requestOptions).then(handleResponse);
 }
 
 // prefixed with underscored because delete is a reserved word in javascript
-function _delete(url:string) {
+function _delete(url:string, body:Object) {
   const requestOptions = {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
   };
   return fetch(url, requestOptions).then(handleResponse);
 }
@@ -45,7 +47,7 @@ function _delete(url:string) {
 function handleResponse(response:any) {
   return response.text().then((text:any) => {
       const data = text && JSON.parse(text);
-      
+
       if (!response.ok) {
           const error = (data && data.message) || response.statusText;
           return Promise.reject(error);
