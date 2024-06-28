@@ -7,7 +7,7 @@ import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import { AddBikePage } from './pages/AddBikePage';
 import { MyBikesPage } from './pages/MyBikesPage';
-import { UserReportsPage } from './pages/UserReportsPage.tsx';
+import { UserReportPage } from './pages/UserReportPage.tsx';
 import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import RegisterPage from './pages/RegisterPage';
@@ -15,9 +15,10 @@ import ForgotPassword from './pages/ForgotPassword.tsx';
 import ResetCode from './pages/ResetCode';
 import UpdatePassword from './pages/UpdatePassword';
 import { EditUserPage } from './pages/EditUserPage';
-import { UserReportsDetailPage } from '@/pages/UserReportsDetailPage.tsx';
+import { UserReportDetailPage } from '@/pages/UserReportDetailPage.tsx';
 import { EditBikePage } from './pages/EditBikePage';
 import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
+import UserReportBikeFoundPage from '@/pages/UserReportBikeFoundPage.tsx';
 const App: React.FC = () => {
   const [isVisited, setIsVisited] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -73,10 +74,14 @@ const App: React.FC = () => {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/AddBikePage' element={<AddBikePage />} />
                 <Route path='/MyBikesPage' element={<MyBikesPage />} />
-                <Route path='/UserReportsPage' element={<UserReportsPage />} />
+                <Route path='/UserReportPage' element={<UserReportPage />} />
                 <Route
-                  path='/details/:id'
-                  element={<UserReportsDetailPage />}
+                  path='/UserReportPage/:id'
+                  element={<UserReportDetailPage />}
+                />
+                <Route
+                  path='/UserReportBikeFoundPage/:id'
+                  element={<UserReportBikeFoundPage />}
                 />
                 <Route path='/editUser' element={<EditUserPage />} />
                 <Route path='/EditBikePage/:id' element={<EditBikePage />} />

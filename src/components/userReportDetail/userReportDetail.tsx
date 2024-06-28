@@ -1,10 +1,11 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {
     Grid,
     Card,
     CardContent,
-    Typography, Fab, useTheme, Button,
+    Typography,
+    Button,
 } from '@mui/material';
 import { UserReport } from "@/interfaces/userReport.ts";
 import { format, isYesterday } from 'date-fns';
@@ -42,7 +43,7 @@ const UserReportDetailPage = () => {
     const location = useLocation();
     const { UserReportData } = location.state as { UserReportData: UserReport };
     const coordinates = extractCoordinates(UserReportData.gps);
-
+    const navigate = useNavigate();
 
     return (
 
@@ -88,11 +89,11 @@ const UserReportDetailPage = () => {
                     </Grid>
                 </CardContent>
             </Card>
-            <Grid item xs={12} sm={12} style={{marginTop:'16px'}}>
-                <Button variant="contained" fullWidth>
-                    Report Found
-                </Button>
-            </Grid>
+            {/*<Grid item xs={12} sm={12} style={{marginTop:'16px'}}>*/}
+            {/*    <Button variant="contained" fullWidth onClick={() => navigate(`/UserReportBikeFoundPage/${UserReportData.id}`, {state: {UserReportData}})}>*/}
+            {/*        Report Found*/}
+            {/*    </Button>*/}
+            {/*</Grid>*/}
         </>
     );
 }

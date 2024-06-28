@@ -1,8 +1,8 @@
-import UserReportsList from '@/components/userReportsList/userReportsList.tsx';
 import { Box } from '@mui/material';
+import UserReportFound from "@/components/userReportBikeFound/userReportBikeFound.tsx";
 
 
-export function UserReportsPage () {
+export default function UserReportBikeFoundPage () {
     return (
         <Box sx={{
             width: '100%',
@@ -14,7 +14,7 @@ export function UserReportsPage () {
             mt: 8,
             pb: 7,
         }}>
-            <UserReportsList></UserReportsList>
+            <UserReportFound></UserReportFound>
         </Box>
     );
 }
