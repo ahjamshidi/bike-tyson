@@ -9,6 +9,9 @@ import { MyBikesPage } from './pages/MyBikesPage';
 import UserReportPage from './pages/UserReportPage';
 import { Box } from '@mui/material';
 import RegisterPage from './pages/RegisterPage';
+import ForgotPassword from './pages/ForgotPassword.tsx';
+import ResetCode from './pages/ResetCode';
+import UpdatePassword from './pages/UpdatePassword';
 import { EditUserPage } from './pages/EditUserPage';
 import UserReportDetailPage from '@/pages/UserReportDetailPage.tsx';
 import { EditBikePage } from './pages/EditBikePage';
@@ -30,7 +33,10 @@ const App: React.FC = () => {
     if (
       !visited &&
       location.pathname !== '/login' &&
-      location.pathname !== '/register'
+      location.pathname !== '/register' &&
+      location.pathname !== '/forgot-password' &&
+      location.pathname !== '/reset-code' &&
+      location.pathname !== '/update-password'
     ) {
       navigate('/welcome', { replace: true });
     }
