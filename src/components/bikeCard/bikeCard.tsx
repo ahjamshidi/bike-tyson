@@ -68,7 +68,7 @@ export default function BikeCard({ BikeData }: { BikeData: Bicycle }) {
             size="medium"
             variant="contained"
             fullWidth
-            onClick={() => navigateToPath('/reportBike')}
+            onClick={() => navigateToPath('/stolenBikeReport')}
           >
             Report
           </Button>

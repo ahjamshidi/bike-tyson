@@ -84,6 +84,10 @@ const App: React.FC = () => {
                 element={<EditUserPage pageTitleHandler={setPageTitle} />}
               />
               <Route
+                path="/EditBikePage/:id"
+                element={<EditBikePage pageTitleHandler={setPageTitle} />}
+              />
+              <Route
                 path="/stolenBikeReport"
                 element={
                   <AddStolenBikeReport pageTitleHandler={setPageTitle} />
