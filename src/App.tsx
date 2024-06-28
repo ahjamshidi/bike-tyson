@@ -7,14 +7,15 @@ import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import { AddBikePage } from './pages/AddBikePage';
 import { MyBikesPage } from './pages/MyBikesPage';
-import { UserReportsPage } from './pages/UserReportsPage.tsx';
+import { UserReportPage } from './pages/UserReportPage.tsx';
 import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import RegisterPage from './pages/RegisterPage';
 import { EditUserPage } from './pages/EditUserPage';
-import {UserReportsDetailPage} from "@/pages/UserReportsDetailPage.tsx";
+import {UserReportDetailPage} from "@/pages/UserReportDetailPage.tsx";
 import { EditBikePage } from './pages/EditBikePage';
 import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
+import UserReportBikeFoundPage from "@/pages/UserReportBikeFoundPage.tsx";
 const App: React.FC = () => {
   const [isVisited, setIsVisited] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -63,16 +64,15 @@ const App: React.FC = () => {
             </AppBar>
             <Container maxWidth="sm" sx={{ padding: 0 }}>
               <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/AddBikePage" element={<AddBikePage />} />
-                <Route path="/MyBikesPage" element={<MyBikesPage />} />
-                <Route path="/UserReportsPage" element={<UserReportsPage />} />
-                 <Route path="/details/:id" element={<UserReportsDetailPage />} />
-                <Route path="/editUser" element={<EditUserPage />} />
-                <Route path="/EditBikePage/:id" element={<EditBikePage />} />
-                <Route
-                  path="/stolenBikeReport"
-                  element={<AddStolenBikeReport />}
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/AddBikePage" element={<AddBikePage />} />
+                  <Route path="/MyBikesPage" element={<MyBikesPage />} />
+                  <Route path="/UserReportPage" element={<UserReportPage />} />
+                  <Route path="/UserReportPage/:id" element={<UserReportDetailPage />} />
+                  <Route path="/UserReportBikeFoundPage/:id" element={<UserReportBikeFoundPage/>} />
+                  <Route path="/editUser" element={<EditUserPage />} />
+                  <Route path="/EditBikePage/:id" element={<EditBikePage />} />
+                  <Route path="/stolenBikeReport" element={<AddStolenBikeReport />}
                 />
               </Routes>
             </Container>
