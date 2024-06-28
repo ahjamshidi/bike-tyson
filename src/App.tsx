@@ -7,11 +7,14 @@ import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import { AddBikePage } from './pages/AddBikePage';
 import { MyBikesPage } from './pages/MyBikesPage';
+import { UserReportsPage } from './pages/UserReportsPage.tsx';
 import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import RegisterPage from './pages/RegisterPage';
-
+import { EditUserPage } from './pages/EditUserPage';
+import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
 const App: React.FC = () => {
+      const defaultTheme = createTheme(themeOptions);
   const [isVisited, setIsVisited] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,6 +65,9 @@ const App: React.FC = () => {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/AddBikePage' element={<AddBikePage />} />
                 <Route path='/MyBikesPage' element={<MyBikesPage />} />
+                <Route path="/UserReportsPage" element={<UserReportsPage />} />
+                <Route path="/editUser" element={<EditUserPage />} />
+                <Route path="/stolenBikeReport" element={<AddStolenBikeReport />} />
               </Routes>
             </Container>
             <AppBottomNavigation />
