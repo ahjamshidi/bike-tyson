@@ -18,6 +18,7 @@ import { EditUserPage } from './pages/EditUserPage';
 import { UserReportDetailPage } from '@/pages/UserReportDetailPage.tsx';
 import { EditBikePage } from './pages/EditBikePage';
 import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
+import UserReportBikeFoundPage from '@/pages/UserReportBikeFoundPage.tsx';
 import ProfilePage from './pages/ProfilePage.tsx';
 
 const App: React.FC = () => {
@@ -75,7 +76,11 @@ const App: React.FC = () => {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/AddBikePage' element={<AddBikePage />} />
                 <Route path='/MyBikesPage' element={<MyBikesPage />} />
-                <Route path='/UserReportsPage' element={<UserReportPage />} />
+                <Route path='/UserReportPage' element={<UserReportPage />} />
+                <Route
+                  path='/UserReportPage/:id'
+                  element={<UserReportDetailPage />}
+                />
                 <Route path='/editUser' element={<EditUserPage />} />
                 <Route path='/EditBikePage/:id' element={<EditBikePage />} />
                 <Route
