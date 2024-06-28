@@ -18,7 +18,6 @@ import { MainLayout } from './mainLayout.tsx';
 import { WelcomeLayout } from './welcomeLayout.tsx';
 
 const App: React.FC = () => {
-  // const [isVisited, setIsVisited] = useState<boolean>(false);
   const [pageTitle, setPageTitle] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,7 +27,6 @@ const App: React.FC = () => {
     if (visited && location.pathname === '/welcome') {
       navigate('/', { replace: true });
     }
-    // setIsVisited(visited);
     if (
       !visited &&
       location.pathname !== '/login' &&
@@ -37,10 +35,6 @@ const App: React.FC = () => {
       navigate('/welcome', { replace: true });
     }
   }, [navigate]);
-
-  const handleBackBut = () => {
-    navigate(-1);
-  };
 
   return (
     <>

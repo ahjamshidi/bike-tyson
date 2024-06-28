@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { CONFIG } from './constances/config.ts';
-export function MainLayout({ pageTitle }) {
+export function MainLayout({ pageTitle }: { pageTitle: string }) {
   const [showBack, setShowBack] = useState(false);
   const [pagePath, setPagePath] = useState('');
   const navigate = useNavigate();
