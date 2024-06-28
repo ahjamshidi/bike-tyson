@@ -14,6 +14,8 @@ import RegisterPage from './pages/RegisterPage';
 import { EditUserPage } from './pages/EditUserPage';
 import { EditBikePage } from './pages/EditBikePage';
 import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
+import ProfilePage from './pages/ProfilePage.tsx';
+
 const App: React.FC = () => {
   const [isVisited, setIsVisited] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -47,12 +49,12 @@ const App: React.FC = () => {
       >
         {isVisited && (
           <>
-            <AppBar position="fixed">
+            <AppBar position='fixed'>
               <Toolbar>
                 <IconButton
-                  edge="start"
-                  color="inherit"
-                  aria-label="menu"
+                  edge='start'
+                  color='inherit'
+                  aria-label='menu'
                   sx={{ mr: 2 }}
                   onClick={handleBackBut}
                 >
@@ -60,18 +62,19 @@ const App: React.FC = () => {
                 </IconButton>
               </Toolbar>
             </AppBar>
-            <Container maxWidth="sm" sx={{ padding: 0 }}>
+            <Container maxWidth='sm' sx={{ padding: 0 }}>
               <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/AddBikePage" element={<AddBikePage />} />
-                <Route path="/MyBikesPage" element={<MyBikesPage />} />
-                <Route path="/UserReportsPage" element={<UserReportsPage />} />
-                <Route path="/editUser" element={<EditUserPage />} />
-                <Route path="/EditBikePage/:id" element={<EditBikePage />} />
+                <Route path='/' element={<HomePage />} />
+                <Route path='/AddBikePage' element={<AddBikePage />} />
+                <Route path='/MyBikesPage' element={<MyBikesPage />} />
+                <Route path='/UserReportsPage' element={<UserReportsPage />} />
+                <Route path='/editUser' element={<EditUserPage />} />
+                <Route path='/EditBikePage/:id' element={<EditBikePage />} />
                 <Route
-                  path="/stolenBikeReport"
+                  path='/stolenBikeReport'
                   element={<AddStolenBikeReport />}
                 />
+                <Route path='/profile' element={<ProfilePage />} />
               </Routes>
             </Container>
             <AppBottomNavigation />
@@ -79,9 +82,9 @@ const App: React.FC = () => {
         )}
         {!isVisited && (
           <Routes>
-            <Route path="/" element={<WelcomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+            <Route path='/' element={<WelcomePage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/register' element={<RegisterPage />} />
           </Routes>
         )}
       </Box>
