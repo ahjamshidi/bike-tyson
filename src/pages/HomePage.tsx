@@ -6,7 +6,6 @@ import { Box, Fab, useTheme } from '@mui/material';
 export function HomePage() {
   const theme = useTheme();
   return (
-    // <Box sx={{width:'100vh',height:'100vh'}}>
     <Box sx={{
       width: '100%',
       maxWidth: '500px',
