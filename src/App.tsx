@@ -15,6 +15,8 @@ import ForgotPassword from './pages/ForgotPassword.tsx';
 import ResetCode from './pages/ResetCode';
 import UpdatePassword from './pages/UpdatePassword';
 import { EditUserPage } from './pages/EditUserPage';
+import { UserReportsDetailPage } from '@/pages/UserReportsDetailPage.tsx';
+import { EditBikePage } from './pages/EditBikePage';
 import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
 const App: React.FC = () => {
   const [isVisited, setIsVisited] = useState<boolean>(false);
@@ -42,6 +44,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      q
       <Box
         sx={{
           display: 'flex',
@@ -71,7 +74,12 @@ const App: React.FC = () => {
                 <Route path='/AddBikePage' element={<AddBikePage />} />
                 <Route path='/MyBikesPage' element={<MyBikesPage />} />
                 <Route path='/UserReportsPage' element={<UserReportsPage />} />
+                <Route
+                  path='/details/:id'
+                  element={<UserReportsDetailPage />}
+                />
                 <Route path='/editUser' element={<EditUserPage />} />
+                <Route path='/EditBikePage/:id' element={<EditBikePage />} />
                 <Route
                   path='/stolenBikeReport'
                   element={<AddStolenBikeReport />}

@@ -6,7 +6,7 @@ import {
     Typography,
     IconButton,
 } from '@mui/material';
-import { To, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CONFIG } from '@/constances/config';
 import { UserReport } from "@/interfaces/userReport.ts";
 import { format, isYesterday } from 'date-fns';
@@ -27,10 +27,6 @@ const DateDisplay: React.FC<DateDisplayProps> = ({ date }) => {
 export default function UserReportCard({ UserReportData }: { UserReportData: UserReport }) {
     // setting button navigations
     const navigate = useNavigate();
-    const navigateToPath = (path: To) => {
-        navigate(path);
-    };
-
 
     return (
         <>
@@ -67,7 +63,7 @@ export default function UserReportCard({ UserReportData }: { UserReportData: Use
                     </Grid>
                 </CardContent>
                 <CardActions sx={{justifyContent:'flex-end'}}>
-                    <IconButton onClick={() => navigateToPath(`/details/${UserReportData.id}`)}>
+                    <IconButton onClick={() => navigate(`/details/${UserReportData.id}`, {state: {UserReportData}})}>
                         <ArrowForwardIosIcon />
                     </IconButton>
                 </CardActions>
