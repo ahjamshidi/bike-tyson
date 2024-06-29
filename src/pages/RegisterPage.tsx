@@ -12,10 +12,12 @@ import {
   useTheme,
 } from '@mui/material';
 import GoogleLoginComponent from '@/components/googleLogin/GoogleLogin';
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
+import LoginNavbar from '@/components/loginNavbar/LoginNavbar';
+import { CONFIG } from '@/constances/config';
+import { fetchWrapper } from '@/utils/fetchWrapper';
 
 const RegisterPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,10 +31,6 @@ const RegisterPage: React.FC = () => {
   const [success, setSuccess] = useState<string | null>(null);
   const navigate = useNavigate();
   const theme = useTheme();
-
-  const handleBack = () => {
-    navigate(-1);
-  };
 
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
@@ -52,32 +50,36 @@ const RegisterPage: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      fetchWrapper
+        .post(`${CONFIG.BaseURL}/auth/register`, {
           email,
           password,
           first_name: firstName,
           last_name: lastName,
-        }),
-      });
-
-      if (response.ok) {
-        setSuccess('Registration successful! Redirecting to login...');
-        setTimeout(() => {
-          navigate('/login', { replace: true });
-        }, 3000);
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || 'Registration failed');
-        setTimeout(() => {
-          setError(null);
-        }, 3000);
-      }
-    } catch (err) {
+        })
+        .then((response: any) => {
+          if (response.ok) {
+            setSuccess('Registration successful! Redirecting to login...');
+            setTimeout(() => {
+              navigate('/login', { replace: true });
+            }, 3000);
+          } else {
+            const errorData = response.json();
+            setError(errorData.message || 'Registration failed');
+            setTimeout(() => {
+              setError(null);
+            }, 3000);
+          }
+        })
+        .catch((error) => {
+          console.error('Registration failed:', error);
+          setError('An unexpected error occurred. Please try again.');
+          setTimeout(() => {
+            setError(null);
+          }, 3000);
+        });
+    } catch (error) {
+      console.error('Error during registration:', error);
       setError('An unexpected error occurred. Please try again.');
       setTimeout(() => {
         setError(null);
@@ -87,31 +89,7 @@ const RegisterPage: React.FC = () => {
 
   return (
     <>
-      <Box
-        display='flex'
-        flexDirection='row'
-        alignItems='left'
-        justifyContent='left'
-        p={2}
-        bgcolor='background.paper'
-      >
-        <IconButton
-          edge='start'
-          color='inherit'
-          aria-label='menu'
-          sx={{
-            borderRadius: '10px',
-            border: '1px solid',
-            borderColor: theme.palette.divider,
-            mr: 2,
-            left: '10px',
-            top: '20px',
-          }}
-          onClick={handleBack}
-        >
-          <ArrowBackIosNewRoundedIcon />
-        </IconButton>
-      </Box>
+      <LoginNavbar />
 
       <Box
         display='flex'
