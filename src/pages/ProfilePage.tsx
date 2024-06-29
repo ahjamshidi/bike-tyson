@@ -15,6 +15,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import HomeIcon from '@mui/icons-material/Home';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { useNavigate } from 'react-router-dom';
+import { CONFIG } from '@/constances/config';
 
 interface UserProfile {
   first_name: string;
@@ -26,12 +27,17 @@ interface UserProfile {
   profile_pic_url: string;
 }
 
-const ProfilePage: React.FC = () => {
+const ProfilePage = ({
+  pageTitleHandler,
+}: {
+  pageTitleHandler: React.Dispatch<React.SetStateAction<string>>;
+}) => {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    pageTitleHandler(CONFIG.PageRoute.profile.title);
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem('jwt');
@@ -150,7 +156,9 @@ const ProfilePage: React.FC = () => {
             variant="contained"
             color="primary"
             sx={{ mt: 2, mb: 2, height: '50px' }}
-            onClick={() => navigate('/editUser', { state: { user } })}
+            onClick={() =>
+              navigate(`${CONFIG.PageRoute.editUser.path}`, { state: { user } })
+            }
           >
             Edit profile
           </Button>

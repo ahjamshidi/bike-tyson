@@ -19,12 +19,13 @@ import { AddStolenBikeReport } from './pages/AddStolenBikeReport';
 import ProfilePage from './pages/ProfilePage.tsx';
 import { MainLayout } from './mainLayout.tsx';
 import { WelcomeLayout } from './welcomeLayout.tsx';
+import { CONFIG } from './constances/config.ts';
 
 const App: React.FC = () => {
   const [pageTitle, setPageTitle] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-
+  const routeNames = CONFIG.PageRoute;
   useEffect(() => {
     const visited = localStorage.getItem('isVisited') === 'true';
     if (visited && location.pathname === '/welcome') {
@@ -56,34 +57,34 @@ const App: React.FC = () => {
         <>
           <Routes>
             <Route element={<MainLayout pageTitle={pageTitle} />}>
-              <Route path="/" element={<HomePage />} />
+              <Route path={routeNames.HomePage.path} element={<HomePage />} />
               <Route
-                path="/AddBikePage"
+                path={routeNames.AddBikePage.path}
                 element={<AddBikePage pageTitleHandler={setPageTitle} />}
               />
               <Route
-                path="/MyBikesPage"
+                path={routeNames.MyBikesPage.path}
                 element={<MyBikesPage pageTitleHandler={setPageTitle} />}
               />
               <Route
-                path="/UserReportsPage"
+                path={routeNames.UserReportsPage.path}
                 element={<UserReportPage pageTitleHandler={setPageTitle} />}
               />
               <Route
-                path="/UserReportPage/:id"
-                element={<UserReportDetailPage />}
+                path={routeNames.UserReportPage.path}
+                element={<UserReportDetailPage pageTitleHandler={setPageTitle} />}
               />
               <Route
-                path="/editUser"
+                path={routeNames.editUser.path}
                 element={<EditUserPage pageTitleHandler={setPageTitle} />}
               />
-              <Route path="/profile" element={<ProfilePage />} />
+              <Route path={routeNames.profile.path} element={<ProfilePage pageTitleHandler={setPageTitle}/>} />
               <Route
-                path="/EditBikePage/:id"
+                path={routeNames.EditBikePage.path}
                 element={<EditBikePage pageTitleHandler={setPageTitle} />}
               />
               <Route
-                path="/stolenBikeReport"
+                path={routeNames.stolenBikeReport.path}
                 element={
                   <AddStolenBikeReport pageTitleHandler={setPageTitle} />
                 }

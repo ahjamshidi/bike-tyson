@@ -1,4 +1,5 @@
 import UserReportsList from '@/components/userReportsList/userReportsList.tsx';
+import { CONFIG } from '@/constances/config';
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
 
@@ -8,7 +9,7 @@ export default function UserReportPage({
   pageTitleHandler: React.Dispatch<React.SetStateAction<string>>;
 }) {
   useEffect(() => {
-    pageTitleHandler('UserReports');
+    pageTitleHandler(CONFIG.PageRoute.UserReportsPage.title);
   }, []);
   return (
     <Box

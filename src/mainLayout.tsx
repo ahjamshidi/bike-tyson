@@ -49,7 +49,7 @@ export function MainLayout({ pageTitle }: { pageTitle: string }) {
             <Typography
               variant="h6"
               component="h1"
-              sx={{ width: '100%', textAlign: 'center' }}
+              sx={{ width: '100%', textAlign: 'center',textTransform: "uppercase" }}
             >
               {pageTitle}
             </Typography>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box } from '@mui/material';
 import { StolenBikeForm } from '@/components/stolenBikeForm/stolenBikeFrom';
+import { CONFIG } from '@/constances/config';
 
 export function AddStolenBikeReport({
   pageTitleHandler,
@@ -8,7 +9,7 @@ export function AddStolenBikeReport({
   pageTitleHandler: React.Dispatch<React.SetStateAction<string>>;
 }) {
   React.useEffect(() => {
-    pageTitleHandler('AddStolenBikeReport');
+    pageTitleHandler(CONFIG.PageRoute.stolenBikeReport.title);
   }, []);
   return (
     <Box

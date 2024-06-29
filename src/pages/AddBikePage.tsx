@@ -1,4 +1,5 @@
 import AddBikeForm from '@/components/addBikeForm/AddBikeForm';
+import { CONFIG } from '@/constances/config';
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
 export function AddBikePage({
@@ -7,7 +8,7 @@ export function AddBikePage({
   pageTitleHandler: React.Dispatch<React.SetStateAction<string>>;
 }) {
   useEffect(() => {
-    pageTitleHandler('AddBikePage');
+    pageTitleHandler(CONFIG.PageRoute.AddBikePage.title);
   }, []);
   return (
     <Box

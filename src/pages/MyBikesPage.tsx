@@ -1,4 +1,5 @@
 import MyBikesList from '@/components/myBikesList/myBikesList';
+import { CONFIG } from '@/constances/config';
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
 
@@ -8,7 +9,7 @@ export function MyBikesPage({
   pageTitleHandler: React.Dispatch<React.SetStateAction<string>>;
 }) {
   useEffect(() => {
-    pageTitleHandler('MyBikesPage');
+    pageTitleHandler(CONFIG.PageRoute.MyBikesPage.title);
   }, []);
   return (
     <Box
