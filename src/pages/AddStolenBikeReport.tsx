@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box } from '@mui/material';
-import { StolenBikeForm } from '@/components/stolenBikeForm/stolenBikeFrom';
+import { StolenBikeForm } from '@/components/stolenBikeForm/stolenBikeForm';
 import { CONFIG } from '@/constances/config';
 
 export function AddStolenBikeReport({

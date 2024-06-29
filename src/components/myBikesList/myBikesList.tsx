@@ -8,20 +8,32 @@ import { CONFIG } from '@/constances/config';
 import { fetchWrapper } from '@/utils/fetchWrapper';
 import { Bicycle } from '@/interfaces/bike';
 export default function MyBikesList() {
-  const [bikes, setBike] = useState<Bicycle[]>([]);
+  const [bikes, setBikes] = useState<Bicycle[]>([]);
   const theme = useTheme();
   useEffect(() => {
-    fetchWrapper
-      .get(`${CONFIG.BaseURL}/api/bicycles`)
-      .then((response) => {
-        setBike(response);
-      })
-      .catch((error) => console.error('Failed to fetch bikes details:', error));
+    const fetchBikes = async () => {
+      try {
+        const userId = localStorage.getItem('user_id');
+        if (!userId) {
+          console.error('User is not authenticated');
+          return;
+        }
+
+        const response = await fetchWrapper.get(
+          `${CONFIG.BaseURL}/api/bicycles/user/${userId}`
+        );
+        setBikes(response);
+      } catch (error) {
+        console.error('Failed to fetch bikes details:', error);
+      }
+    };
+
+    fetchBikes();
   }, []);
 
   return (
     <>
-      <Box component="div">
+      <Box component='div'>
         <Grid
           item
           xs={12}
@@ -35,18 +47,18 @@ export default function MyBikesList() {
               justifyContent: 'space-between',
             }}
           >
-            <Typography sx={{}} color="text.secondary">
+            <Typography sx={{}} color='text.secondary'>
               Add your new bikes.
             </Typography>
             <Link to={CONFIG.PageRoute.AddBikePage.path}>
               <Fab
-                size="medium"
+                size='medium'
                 sx={{
                   borderRadius: '20%',
                   backgroundColor: '#fff',
                   boxShadow: 'none',
                   color: theme.palette.primary.dark,
-                  border:1,
+                  border: 1,
                   borderColor: theme.palette.primary.dark,
                 }}
               >
