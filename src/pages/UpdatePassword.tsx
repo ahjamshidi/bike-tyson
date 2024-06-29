@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Box, Button, TextField, Typography, Alert } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import LoginNavbar from '@/components/loginNavbar/LoginNavbar';
+import { CONFIG } from '@/constances/config';
+import { fetchWrapper } from '@/utils/fetchWrapper';
 
 const UpdatePassword: React.FC = () => {
   const [password, setPassword] = useState('');

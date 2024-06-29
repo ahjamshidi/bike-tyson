@@ -43,7 +43,7 @@ export default function CustomModal({
             >
               <span className="modal-title"> {modalTitle}</span>
 
-             {modalCloseElement}
+              {modalCloseElement}
             </Box>
             <Divider component="div" />
             <Box component="div" sx={{ width: '100%', p: 0, height: '100%' }}>
@@ -63,15 +63,6 @@ const Backdrop = React.forwardRef<
   const classListName = open ? 'base-Backdrop-open' : '';
   return <div className={classListName + className} ref={ref} {...other} />;
 });
-
-const blue = {
-  200: '#99CCFF',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0066CC',
-};
 
 const grey = {
   50: '#F3F6F9',

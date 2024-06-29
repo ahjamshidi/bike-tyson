@@ -42,7 +42,7 @@ export function StolenBikeForm() {
   const theme = useTheme();
   const { isOpen, openModal, closeModal } = useModal();
   const initFormValue = {
-    user_id: Number(localStorage.getItemItem('user_id')),
+    user_id: Number(localStorage.getItem('user_id')),
     bike_id: 0,
     start_datetime: dayjs(),
     end_datetime: dayjs(),
@@ -132,9 +132,9 @@ export function StolenBikeForm() {
         Police`s website: https://www.internetwache-polizei-berlin.de/
       </Typography>
       <Box
-        component='form'
+        component="form"
         noValidate={false}
-        autoComplete='on'
+        autoComplete="on"
         onSubmit={handleSubmit}
       >
         <Grid container spacing={2}>
@@ -148,9 +148,9 @@ export function StolenBikeForm() {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Grid item xs={12} sm={6}>
               <DateTimePicker
-                label='Last Time See Your Bike'
+                label="Last Time See Your Bike"
                 sx={{ width: '100%' }}
-                name='start_datetime'
+                name="start_datetime"
                 onChange={(value) => {
                   handleChange({
                     target: { name: 'start_datetime', value: value },
@@ -165,14 +165,14 @@ export function StolenBikeForm() {
                 maxDateTime={dayjs().set('hour', dayjs().hour()).endOf('hour')}
               />
               {errors.start_datetime && (
-                <Typography color='error'>{errors.start_datetime}</Typography>
+                <Typography color="error">{errors.start_datetime}</Typography>
               )}
             </Grid>
             <Grid item xs={12} sm={6}>
               <DateTimePicker
-                label='Notice Bike Was Stolen'
+                label="Notice Bike Was Stolen"
                 sx={{ width: '100%' }}
-                name='end_datetime'
+                name="end_datetime"
                 onChange={(value) => {
                   handleChange({
                     target: { name: 'end_datetime', value: value },
@@ -182,36 +182,36 @@ export function StolenBikeForm() {
                 maxDateTime={dayjs().set('hour', dayjs().hour()).endOf('hour')}
               />
               {errors.end_datetime && (
-                <Typography color='error'>{errors.end_datetime}</Typography>
+                <Typography color="error">{errors.end_datetime}</Typography>
               )}
             </Grid>
           </LocalizationProvider>
           <Grid item xs={12} sm={6}>
-            <Button variant='contained' color='primary' onClick={openModal}>
+            <Button variant="contained" color="primary" onClick={openModal}>
               select location
             </Button>
-            {errors.gps && <Typography color='error'>{errors.gps}</Typography>}
+            {errors.gps && <Typography color="error">{errors.gps}</Typography>}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label='Description'
-              name='description'
+              label="Description"
+              name="description"
               value={formData.description}
               multiline
               onChange={handleChange}
               rows={4}
             />
-            <input type='hidden' name='gps' required value={formData.gps} />
+            <input type="hidden" name="gps" required value={formData.gps} />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <Button variant='contained' type='submit' fullWidth>
+            <Button variant="contained" type="submit" fullWidth>
               Submit Report
             </Button>
           </Grid>
         </Grid>
         {formSubmitMsg && (
-          <Typography color='green' sx={{ textAlign: 'center' }}>
+          <Typography color="green" sx={{ textAlign: 'center' }}>
             {formSubmitMsg}{' '}
           </Typography>
         )}
@@ -219,7 +219,7 @@ export function StolenBikeForm() {
         <CustomModal
           isOpen={isOpen}
           closeModal={closeModal}
-          modalTitle='Choos location on map'
+          modalTitle="Choos location on map"
           modalCloseElement={<span onClick={closeModal}>OK</span>}
         >
           <CustomMap
