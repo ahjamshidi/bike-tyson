@@ -72,13 +72,18 @@ const App: React.FC = () => {
               />
               <Route
                 path={routeNames.UserReportPage.path}
-                element={<UserReportDetailPage pageTitleHandler={setPageTitle} />}
+                element={
+                  <UserReportDetailPage pageTitleHandler={setPageTitle} />
+                }
               />
               <Route
                 path={routeNames.editUser.path}
                 element={<EditUserPage pageTitleHandler={setPageTitle} />}
               />
-              <Route path={routeNames.profile.path} element={<ProfilePage pageTitleHandler={setPageTitle}/>} />
+              <Route
+                path={routeNames.profile.path}
+                element={<ProfilePage pageTitleHandler={setPageTitle} />}
+              />
               <Route
                 path={routeNames.EditBikePage.path}
                 element={<EditBikePage pageTitleHandler={setPageTitle} />}
@@ -95,6 +100,9 @@ const App: React.FC = () => {
               <Route path="/welcome" element={<WelcomePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-code" element={<ResetCode />} />
+              <Route path="/update-password" element={<UpdatePassword />} />
             </Route>
           </Routes>
         </>

@@ -58,9 +58,7 @@ const GoogleLoginComponent: React.FC = () => {
             onSuccess={onSuccess}
             onError={onFailure}
             width={'100%'}
-            containerProps={{
-              style: { width: '100%' },
-            }}
+            containerProps={{}}
           />
         </GoogleOAuthProvider>
       </Box>
