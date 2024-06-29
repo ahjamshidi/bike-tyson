@@ -38,7 +38,7 @@ export default function MyBikesList() {
             <Typography sx={{}} color="text.secondary">
               Add your new bikes.
             </Typography>
-            <Link to="/AddBikePage">
+            <Link to={CONFIG.PageRoute.AddBikePage.path}>
               <Fab
                 size="medium"
                 sx={{

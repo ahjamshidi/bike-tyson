@@ -1,10 +1,19 @@
 import EditBikeForm from '@/components/editBikeForm/EditBikeForm';
+import { CONFIG } from '@/constances/config';
 import { Box } from '@mui/material';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 
 
-export function EditBikePage () {
+export function EditBikePage ({
+  pageTitleHandler,
+}: {
+  pageTitleHandler: React.Dispatch<React.SetStateAction<string>>;
+}) {
+  useEffect(() => {
+    pageTitleHandler(CONFIG.PageRoute.EditBikePage.title);
+  }, []);
 
   // Extracting `id` from the URL
   const {id} = useParams();

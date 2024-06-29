@@ -11,9 +11,20 @@ const ORANG_COLOR_RGB: [number, number, number] = [255, 87, 34];
 export function LoadDataOnMap() {
   const map = useMap();
   const latLong: any = { lat: 52.52, lng: 13.405 };
+  const initinfoContent = {
+    title: '',
+    lor_code: '',
+    num_thefts: 0,
+    theft_percentage: 0,
+    population: 0,
+    total_value: 0,
+    color_level: 0,
+  };
   const [infoWindowPosition, setinfoWindowPosition] = React.useState(latLong);
   const [reportData, setReportData] = React.useState<PoliceReportList>();
-  const [infoContent, setinfoContent] = React.useState<InfoWindowContent>();
+  const [infoContent, setinfoContent] =
+    React.useState<InfoWindowContent>(initinfoContent);
+  const [isInfoWindowVisible, setIsInfoWindowVisible] = React.useState(false);
   const isGeoJsonLoaded = React.useRef(false);
 
   React.useEffect(() => {
@@ -25,9 +36,13 @@ export function LoadDataOnMap() {
   }, []);
   React.useEffect(() => {
     if (map && !isGeoJsonLoaded.current && reportData) {
-      map?.data.loadGeoJson('./berlin-lor.geojson', null, () => {
-        isGeoJsonLoaded.current = true;
-      });
+      map?.data.loadGeoJson(
+        './berlin-lor.geojson',
+        { idPropertyName: 'PLR_ID' },
+        () => {
+          isGeoJsonLoaded.current = true;
+        }
+      );
 
       map?.data.setStyle((feature: google.maps.Data.Feature) => {
         const PLRID = feature.getProperty('PLR_ID') as string;
@@ -61,8 +76,7 @@ export function LoadDataOnMap() {
           const feature = event.feature;
           const PLRID = feature.getProperty('PLR_ID') as string;
           const name = feature.getProperty('PLR_NAME') as string;
-
-          setinfoContent({
+          const areaData = {
             title: name,
             lor_code: PLRID,
             num_thefts: reportData[PLRID].num_thefts,
@@ -70,8 +84,12 @@ export function LoadDataOnMap() {
             population: reportData[PLRID].population,
             total_value: reportData[PLRID].total_value,
             color_level: reportData[PLRID].color_level,
-          });
-          if (event.latLng) setinfoWindowPosition(event.latLng);
+          };
+          setinfoContent(areaData);
+          if (event.latLng) {
+            setinfoWindowPosition(event.latLng);
+            setIsInfoWindowVisible(true);
+          }
         }
       );
     }
@@ -79,10 +97,11 @@ export function LoadDataOnMap() {
 
   return (
     <>
-      {infoContent && (
+      {isInfoWindowVisible && (
         <InfoWindow
           position={infoWindowPosition}
           headerContent={<h3 style={{ margin: 0 }}>{infoContent.title}</h3>}
+          onCloseClick={() => setIsInfoWindowVisible(false)}
         >
           <Typography variant="subtitle2" component="p">
             thefts cases:{' '}

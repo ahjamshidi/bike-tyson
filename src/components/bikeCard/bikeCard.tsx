@@ -16,7 +16,6 @@ export default function BikeCard({ BikeData }: { BikeData: Bicycle }) {
   const navigateToPath = (path: To) => {
     navigate(path);
   };
-
   return (
     <>
       <Card sx={{ minWidth: 275 }}>
@@ -55,12 +54,19 @@ export default function BikeCard({ BikeData }: { BikeData: Bicycle }) {
             </Grid>
           </Grid>
         </CardContent>
-        <CardActions sx={{justifyContent:'space-between',mb:1}}>
+        <CardActions sx={{ justifyContent: 'space-between', mb: 1 }}>
           <Button
             variant="outlined"
             size="medium"
             fullWidth
-            onClick={() => navigateToPath(`/EditBikePage/${BikeData.id}`)}
+            onClick={() =>
+              navigateToPath(
+                `${CONFIG.PageRoute.EditBikePage.path.replace(
+                  ':id',
+                  BikeData.id || ''
+                )}`
+              )
+            }
           >
             Edit
           </Button>
@@ -68,7 +74,9 @@ export default function BikeCard({ BikeData }: { BikeData: Bicycle }) {
             size="medium"
             variant="contained"
             fullWidth
-            onClick={() => navigateToPath('/reportBike')}
+            onClick={() =>
+              navigateToPath(CONFIG.PageRoute.stolenBikeReport.path)
+            }
           >
             Report
           </Button>
