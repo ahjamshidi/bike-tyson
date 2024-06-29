@@ -14,7 +14,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Bicycle } from '@/interfaces/bike';
 export default function AddBikeForm() {
   const [bikeData, setBikeData] = useState<Bicycle>({
-    user_id: Number(localStorage.getItemItem('user_id')),
+    user_id: Number(localStorage.getItem('user_id')),
     name: '',
     brand: '',
     model: '',

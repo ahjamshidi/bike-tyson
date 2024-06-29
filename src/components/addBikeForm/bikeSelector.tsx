@@ -1,10 +1,17 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Bicycle } from '@/interfaces/bike';
 
-export function BikeSelector({ bikes, inputValue, onChangeHandler }) {
+export function BikeSelector({
+  bikes,
+  inputValue,
+  onChangeHandler,
+}: {
+  bikes: any;
+  inputValue: any;
+  onChangeHandler: any;
+}) {
   return (
     <Autocomplete
       id="bike-select-demo"
@@ -12,28 +19,27 @@ export function BikeSelector({ bikes, inputValue, onChangeHandler }) {
       // value={inputValue}
       options={bikes}
       autoHighlight
-      onChange={(e)=>{
+      onChange={(e) => {
         onChangeHandler({
-          target: { name: 'bike_id', value: e.target.value },
+          // target: { name: 'bike_id', value: e.target.value },
+          target: { name: 'bike_id', value: e.target },
         });
-
       }}
-      onInputChange={(e) => {
+      onInputChange={() => {
         // console.log('onInputChange ');
-       
       }}
-      getOptionLabel={(option:Bicycle) => option.name}
+      getOptionLabel={(option: Bicycle) => option.name}
       renderOption={(props, option) => {
-        const { key, ...rest } = props;
+        // const { key, ...rest } = props;
         return (
           <Box
             value={option.id}
             component="li"
-            key={key}
+            // key={}
             sx={{
               '& > img': { mr: 2, flexShrink: 0 },
             }}
-            {...rest}
+            {...props}
           >
             <img
               loading="lazy"
