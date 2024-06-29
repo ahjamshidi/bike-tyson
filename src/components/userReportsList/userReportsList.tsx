@@ -75,7 +75,7 @@ export default function UserReportsList() {
 
     return (
         <>
-            <Box component="div" sx={{ marginBottom: 2}}>
+            <Box component="div" sx={{ marginBottom: 2, marginTop:1}}>
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
                         <FormControl fullWidth>
