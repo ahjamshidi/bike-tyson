@@ -1,6 +1,6 @@
 export interface Bicycle {
   id?: string;
-  user_id: number;
+  user_id?: number;
   name: string;
   brand: string;
   model: string;

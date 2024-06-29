@@ -1,27 +1,22 @@
-import {
-  Box,
-  TextField,
-  Button,
-  Grid,
-  InputAdornment
-} from '@mui/material';
+import { Box, TextField, Button, Grid, InputAdornment } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Bicycle } from '@/interfaces/bike';
 import { useEffect, useState } from 'react';
 import { CONFIG } from '@/constances/config';
 import { fetchWrapper } from '@/utils/fetchWrapper';
 
-
-export default function EditBikeForm({ bikeId }:any) {
-
-  const [bikeData, setBikeData] = useState<Bicycle | null>(null);
+export default function EditBikeForm({ bikeId }: any) {
+  // const initData =
+  const [bikeData, setBikeData] = useState<Bicycle | undefined>(undefined);
 
   useEffect(() => {
     if (bikeId) {
       const fetchData = async () => {
         try {
-          const response = await fetchWrapper.get(`${CONFIG.BaseURL}/api/bicycles/${bikeId}`);
-          setBikeData(response[0])
+          const response = await fetchWrapper.get(
+            `${CONFIG.BaseURL}/api/bicycles/${bikeId}`
+          );
+          setBikeData(response[0]);
         } catch (error) {
           console.error('Failed to fetch bike details:', error);
         }
@@ -30,12 +25,18 @@ export default function EditBikeForm({ bikeId }:any) {
     }
   }, []);
 
-
   // To handle edit bike
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setBikeData(prev => ({ ...prev, [name]: value }));
+    setBikeData((prev) => {
+      if (!prev) {
+        console.error('Bike data is undefined');
+        return prev;
+      }
+
+      return { ...prev, [name]: value };
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,24 +44,27 @@ export default function EditBikeForm({ bikeId }:any) {
     if (!bikeData || !bikeId) return;
     const updatedBikeData = { ...bikeData, id: parseInt(bikeId) };
     try {
-      await fetchWrapper.put(`${CONFIG.BaseURL}/api/bicycles/`, updatedBikeData);
+      await fetchWrapper.put(
+        `${CONFIG.BaseURL}/api/bicycles/`,
+        updatedBikeData
+      );
       alert('Bike updated successfully!');
     } catch (error) {
       console.error('Failed to update bike:', error);
     }
-};
+  };
 
-//To handle DELETE bike
-const handleDelete = async () => {
-  if (!bikeId) return;
-  const data = { id: parseInt(bikeId) };
-  try {
-    await fetchWrapper.delete(`${CONFIG.BaseURL}/api/bicycles/`, data);
-    alert('Bike deleted successfully!');
-  } catch (error) {
-    console.error('Failed to delete bike:', error);
-  }
-};
+  //To handle DELETE bike
+  const handleDelete = async () => {
+    if (!bikeId) return;
+    const data = { id: parseInt(bikeId) };
+    try {
+      await fetchWrapper.delete(`${CONFIG.BaseURL}/api/bicycles/`, data);
+      alert('Bike deleted successfully!');
+    } catch (error) {
+      console.error('Failed to delete bike:', error);
+    }
+  };
 
   return (
     <>
@@ -219,17 +223,22 @@ const handleDelete = async () => {
                   <InputAdornment position="start">$</InputAdornment>
                 ),
                 inputProps: {
-                  min: "0.00",
-                  step:"0.01"
+                  min: '0.00',
+                  step: '0.01',
                 },
               }}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <Button variant="outlined" size="medium" onClick={handleDelete} fullWidth>
+            <Button
+              variant="outlined"
+              size="medium"
+              onClick={handleDelete}
+              fullWidth
+            >
               Delete Bike
             </Button>
-            <Button type='submit' size="medium" variant="contained" fullWidth>
+            <Button type="submit" size="medium" variant="contained" fullWidth>
               Edit Bike
             </Button>
           </Grid>
