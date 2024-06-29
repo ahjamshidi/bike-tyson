@@ -15,6 +15,8 @@ import { useNavigate } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import GoogleLoginComponent from '../googleLogin/GoogleLogin';
+import { fetchWrapper } from '@/utils/fetchWrapper';
+import { CONFIG } from '@/constances/config';
 
 const LoginForm: React.FC = () => {
   const theme = useTheme();
@@ -30,26 +32,24 @@ const LoginForm: React.FC = () => {
 
   const handleLoginBtn = async () => {
     try {
-      const res = await fetch('http://localhost:3000/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await res.json();
-
-      if (data.token) {
-        localStorage.setItem('isVisited', 'true'); // visited app true
-        localStorage.setItem('jwt', data.token); // Store the token
-        navigate('/'); // Redirect to the home page or any protected route
-      } else {
-        console.error('Login failed: No token received');
-        setError('Unauthorized: Invalid email or password');
-        setTimeout(() => {
-          setError(null);
-        }, 3000);
-      }
+      fetchWrapper
+        .post(`${CONFIG.BaseURL}/auth/login`, { email, password })
+        .then((data: any) => {
+          if (data.token) {
+            localStorage.setItem('isVisited', 'true'); // visited app true
+            localStorage.setItem('jwt', data.token); // Store the token
+            navigate('/'); // Redirect to the home page or any protected route
+          } else {
+            console.error('Login failed: No token received');
+            setError('Unauthorized: Invalid email or password');
+            setTimeout(() => {
+              setError(null);
+            }, 3000);
+          }
+        })
+        .catch((error) =>
+          console.error('Failed to fetch bikes details:', error)
+        );
     } catch (error) {
       console.error('Error during login:', error);
       setError('An unexpected error occurred. Please try again.');
