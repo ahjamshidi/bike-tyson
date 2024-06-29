@@ -11,6 +11,9 @@ import { UserReportPage } from './pages/UserReportPage.tsx';
 import { AppBar, Box, Container, IconButton, Toolbar } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import RegisterPage from './pages/RegisterPage';
+import ForgotPassword from './pages/ForgotPassword.tsx';
+import ResetCode from './pages/ResetCode';
+import UpdatePassword from './pages/UpdatePassword';
 import { EditUserPage } from './pages/EditUserPage';
 import {UserReportDetailPage} from "@/pages/UserReportDetailPage.tsx";
 import { EditBikePage } from './pages/EditBikePage';
@@ -28,7 +31,10 @@ const App: React.FC = () => {
     if (
       !visited &&
       location.pathname !== '/login' &&
-      location.pathname !== '/register'
+      location.pathname !== '/register' &&
+      location.pathname !== '/forgot-password' &&
+      location.pathname !== '/reset-code' &&
+      location.pathname !== '/update-password'
     ) {
       navigate('/', { replace: true });
     }
@@ -39,7 +45,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <>q
+    <>
       <Box
         sx={{
           display: 'flex',
@@ -85,6 +91,9 @@ const App: React.FC = () => {
             <Route path='/' element={<WelcomePage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
+            <Route path='/forgot-password' element={<ForgotPassword />} />
+            <Route path='/reset-code' element={<ResetCode />} />
+            <Route path='/update-password' element={<UpdatePassword />} />
           </Routes>
         )}
       </Box>
