@@ -70,10 +70,10 @@ export default function UserReportsList() {
         break;
     }
 
-    const dateField: 'created_at' | 'end_datetime' =
+    const dateField =
       dateTypeFilter === 'created_at' ? 'created_at' : 'end_datetime';
     filtered = filtered.filter((report) =>
-      isAfter(new Date(report[dateField]), timeThreshold)
+      isAfter(new Date(report[dateField] || ''), timeThreshold)
     );
 
     // Apply brand filter

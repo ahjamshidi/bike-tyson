@@ -17,25 +17,25 @@ const DateDisplay: React.FC<DateDisplayProps> = ({ date }) => {
   }
 };
 
-const extractCoordinates = (
-  inputString: string
-): { latitude: number; longitude: number } | null => {
-  const regex = /Latitude: (\d+\.\d+), Longitude: (\d+\.\d+)/;
-  const match = inputString.match(regex);
+// const extractCoordinates = (
+//   inputString: string
+// ): { latitude: number; longitude: number } | null => {
+//   const regex = /Latitude: (\d+\.\d+), Longitude: (\d+\.\d+)/;
+//   const match = inputString.match(regex);
 
-  if (match) {
-    const latitude = parseFloat(match[1]);
-    const longitude = parseFloat(match[2]);
-    return { latitude, longitude };
-  } else {
-    return null;
-  }
-};
+//   if (match) {
+//     const latitude = parseFloat(match[1]);
+//     const longitude = parseFloat(match[2]);
+//     return { latitude, longitude };
+//   } else {
+//     return null;
+//   }
+// };
 
 const UserReportBikeFound = () => {
   const location = useLocation();
   const { UserReportData } = location.state as { UserReportData: UserReport };
-  const coordinates = extractCoordinates(UserReportData.gps);
+  //   const coordinates = extractCoordinates(UserReportData.gps);
   const navigate = useNavigate();
 
   return (
