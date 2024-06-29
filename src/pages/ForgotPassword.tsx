@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import {
   Box,
   Button,
-  IconButton,
   TextField,
   Typography,
   Alert,
   useTheme,
   Link,
 } from '@mui/material';
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { useNavigate } from 'react-router-dom';
+import LoginNavbar from '@/components/loginNavbar/LoginNavbar';
+import { CONFIG } from '@/constances/config';
+import { fetchWrapper } from '@/utils/fetchWrapper';
 
 const ForgotPassword: React.FC = () => {
   const theme = useTheme();
@@ -19,36 +20,33 @@ const ForgotPassword: React.FC = () => {
   const [success, setSuccess] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const handleBack = () => {
-    navigate(-1);
-  };
-
   const handleSendCode = async () => {
     try {
-      const response = await fetch(
-        'http://localhost:3000/auth/send-reset-code',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email }),
-        }
-      );
-
-      if (response.ok) {
-        setSuccess('Reset code sent to your email.');
-        setTimeout(() => {
-          navigate('/reset-code', { state: { email } });
-        }, 3000);
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || 'Failed to send reset code.');
-        setTimeout(() => {
-          setError(null);
-        }, 3000);
-      }
-    } catch (err) {
+      fetchWrapper
+        .post(`${CONFIG.BaseURL}/auth/send-reset-code`, { email })
+        .then((response: any) => {
+          if (response.ok) {
+            setSuccess('Reset code sent to your email.');
+            setTimeout(() => {
+              navigate('/reset-code', { state: { email } });
+            }, 3000);
+          } else {
+            const errorData = response.json();
+            setError(errorData.message || 'Failed to send reset code.');
+            setTimeout(() => {
+              setError(null);
+            }, 3000);
+          }
+        })
+        .catch((error) => {
+          console.error('Failed to send reset code:', error);
+          setError('An unexpected error occurred. Please try again.');
+          setTimeout(() => {
+            setError(null);
+          }, 3000);
+        });
+    } catch (error) {
+      console.error('Error during sending reset code:', error);
       setError('An unexpected error occurred. Please try again.');
       setTimeout(() => {
         setError(null);
@@ -58,31 +56,7 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <>
-      <Box
-        display='flex'
-        flexDirection='row'
-        alignItems='left'
-        justifyContent='left'
-        p={2}
-        bgcolor='background.paper'
-      >
-        <IconButton
-          edge='start'
-          color='inherit'
-          aria-label='menu'
-          sx={{
-            borderRadius: '10px',
-            border: '1px solid',
-            borderColor: theme.palette.divider,
-            mr: 2,
-            left: '10px',
-            top: '20px',
-          }}
-          onClick={handleBack}
-        >
-          <ArrowBackIosNewRoundedIcon />
-        </IconButton>
-      </Box>
+      <LoginNavbar />
       <Box
         display='flex'
         flexDirection='column'
