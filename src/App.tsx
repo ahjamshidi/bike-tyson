@@ -45,7 +45,6 @@ const App: React.FC = () => {
 
   return (
     <>
-      q
       <Box
         sx={{
           display: 'flex',
