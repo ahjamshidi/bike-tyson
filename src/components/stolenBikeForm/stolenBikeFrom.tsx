@@ -72,7 +72,7 @@ export function StolenBikeForm() {
     }
     setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
   };
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
 
@@ -113,7 +113,7 @@ export function StolenBikeForm() {
         We are sorry to hear your bike got stolen. Here you can report the theft
         of your bike to the community so others know which areas to avoid We
         suggest to create an official Police report: (030) 46644664 and at
-        Police’s website: https://www.internetwache-polizei-berlin.de/
+        Police`s website: https://www.internetwache-polizei-berlin.de/
       </Typography>
       <Box
         component="form"
@@ -135,7 +135,7 @@ export function StolenBikeForm() {
                 label="Last Time See Your Bike"
                 sx={{ width: '100%' }}
                 name="start_datetime"
-                onChange={(value, context) => {
+                onChange={(value) => {
                   handleChange({
                     target: { name: 'start_datetime', value: value },
                   });
@@ -157,7 +157,7 @@ export function StolenBikeForm() {
                 label="Notice Bike Was Stolen"
                 sx={{ width: '100%' }}
                 name="end_datetime"
-                onChange={(value, context) => {
+                onChange={(value) => {
                   handleChange({
                     target: { name: 'end_datetime', value: value },
                   });
@@ -194,9 +194,11 @@ export function StolenBikeForm() {
             </Button>
           </Grid>
         </Grid>
-          {formSubmitMsg && (
-            <Typography color="green" sx={{textAlign:'center'}}>{formSubmitMsg} </Typography>
-          )}
+        {formSubmitMsg && (
+          <Typography color="green" sx={{ textAlign: 'center' }}>
+            {formSubmitMsg}{' '}
+          </Typography>
+        )}
 
         <CustomModal
           isOpen={isOpen}

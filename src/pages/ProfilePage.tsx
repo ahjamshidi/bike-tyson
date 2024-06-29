@@ -9,13 +9,13 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  useTheme,
 } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import HomeIcon from '@mui/icons-material/Home';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { useNavigate } from 'react-router-dom';
+import { CONFIG } from '@/constances/config';
 
 interface UserProfile {
   first_name: string;
@@ -27,13 +27,17 @@ interface UserProfile {
   profile_pic_url: string;
 }
 
-const ProfilePage: React.FC = () => {
+const ProfilePage = ({
+  pageTitleHandler,
+}: {
+  pageTitleHandler: React.Dispatch<React.SetStateAction<string>>;
+}) => {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const theme = useTheme();
 
   useEffect(() => {
+    pageTitleHandler(CONFIG.PageRoute.profile.title);
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem('jwt');
@@ -61,10 +65,10 @@ const ProfilePage: React.FC = () => {
   if (!user) {
     return (
       <Box
-        display='flex'
-        justifyContent='center'
-        alignItems='center'
-        height='100vh'
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
       >
         <Typography>Loading...</Typography>
       </Box>
@@ -74,75 +78,96 @@ const ProfilePage: React.FC = () => {
   return (
     <>
       <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        justifyContent='center'
-        height='100vh'
-        p={2}
-        bgcolor='background.paper'
+        sx={{
+          width: '100%',
+          maxWidth: '500px',
+          overflowY: 'auto',
+          maxHeight: 'calc(100vh - 120px)',
+          padding: '0 20px',
+          boxSizing: 'border-box',
+          mt: 8,
+          pb: 7,
+        }}
       >
-        <Typography variant='h4' gutterBottom sx={{ fontWeight: 'bold' }}>
-          Hello
-        </Typography>
-        <Typography variant='h5' gutterBottom sx={{ fontWeight: 'bold' }}>
-          {user.first_name} {user.last_name}
-        </Typography>
-        <Avatar
-          src={user.profile_pic_url}
-          sx={{ width: 100, height: 100, marginBottom: 2 }}
-        />
         <Box
-          sx={{
-            width: '100%',
-            maxWidth: 360,
-            bgcolor: 'background.paper',
-            padding: 2,
-            borderRadius: 2,
-            boxShadow: 1,
-            mb: 2,
-          }}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          height="100%"
+          p={2}
+          bgcolor="background.paper"
         >
-          <List>
-            <ListItem>
-              <ListItemIcon>
-                <EmailIcon />
-              </ListItemIcon>
-              <ListItemText primary={user.email} />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <PhoneIcon />
-              </ListItemIcon>
-              <ListItemText primary={user.phone_number} />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary={user.address} />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <CalendarTodayIcon />
-              </ListItemIcon>
-              <ListItemText primary={user.date_of_birth} />
-            </ListItem>
-          </List>
+          <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>
+            Hello
+          </Typography>
+          <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
+            {user.first_name} {user.last_name}
+          </Typography>
+          <Avatar
+            src={user.profile_pic_url}
+            sx={{ width: 100, height: 100, marginBottom: 2 }}
+          />
+          <Box
+            sx={{
+              width: '100%',
+              maxWidth: 360,
+              bgcolor: 'background.paper',
+              padding: 2,
+              borderRadius: 2,
+              boxShadow: 1,
+              mb: 2,
+            }}
+          >
+            <List>
+              <ListItem>
+                <ListItemIcon>
+                  <EmailIcon />
+                </ListItemIcon>
+                <ListItemText primary={user.email} />
+              </ListItem>
+              {user.phone_number && (
+                <ListItem>
+                  <ListItemIcon>
+                    <PhoneIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={user.phone_number} />
+                </ListItem>
+              )}
+              {user.address && (
+                <ListItem>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={user.address} />
+                </ListItem>
+              )}
+              {user.date_of_birth && (
+                <ListItem>
+                  <ListItemIcon>
+                    <CalendarTodayIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={user.date_of_birth} />
+                </ListItem>
+              )}
+            </List>
+          </Box>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2, mb: 2, height: '50px' }}
+            onClick={() =>
+              navigate(`${CONFIG.PageRoute.editUser.path}`, { state: { user } })
+            }
+          >
+            Edit profile
+          </Button>
+          {error && (
+            <Alert severity="error" sx={{ width: '100%', mt: 2 }}>
+              {error}
+            </Alert>
+          )}
         </Box>
-        <Button
-          variant='contained'
-          color='primary'
-          sx={{ mt: 2, mb: 2, height: '50px' }}
-          onClick={() => navigate('/editUser')}
-        >
-          Edit profile
-        </Button>
-        {error && (
-          <Alert severity='error' sx={{ width: '100%', mt: 2 }}>
-            {error}
-          </Alert>
-        )}
       </Box>
     </>
   );

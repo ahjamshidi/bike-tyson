@@ -1,8 +1,17 @@
 import { Box } from '@mui/material';
 import UserReportDetail from "@/components/userReportDetail/userReportDetail.tsx";
+import { useEffect } from 'react';
+import { CONFIG } from '@/constances/config';
 
 
-export function UserReportDetailPage () {
+export default function UserReportDetailPage ({
+    pageTitleHandler,
+  }: {
+    pageTitleHandler: React.Dispatch<React.SetStateAction<string>>;
+  }) {
+    useEffect(() => {
+      pageTitleHandler(CONFIG.PageRoute.UserReportPage.title);
+    }, []);
     return (
         <Box sx={{
             width: '100%',

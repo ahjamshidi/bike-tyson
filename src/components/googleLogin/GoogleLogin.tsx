@@ -40,15 +40,21 @@ const GoogleLoginComponent: React.FC = () => {
   return (
     <>
       <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        justifyContent='center'
-        p={2}
-        bgcolor='background.paper'
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        p={0}
+        width={'100%'}
+        bgcolor="background.paper"
       >
         <GoogleOAuthProvider clientId={clientId}>
-          <GoogleLogin onSuccess={onSuccess} onError={onFailure} />
+          <GoogleLogin
+            onSuccess={onSuccess}
+            onError={onFailure}
+            width={'100%'}
+            containerProps={{}}
+          />
         </GoogleOAuthProvider>
       </Box>
     </>
