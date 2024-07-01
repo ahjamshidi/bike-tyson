@@ -26,6 +26,7 @@ const GoogleLoginComponent: React.FC = () => {
         localStorage.setItem('isVisited', 'true'); // visited app true
         localStorage.setItem('jwt', data.token); // Store the token
         const decodedToken: any = jwtDecode(data.token); // Decode the token
+        console.log(decodedToken);
         localStorage.setItem('user_id', decodedToken.userId); //Store user_id
         navigate('/'); // Redirect to the home page or any protected route
       } else {
