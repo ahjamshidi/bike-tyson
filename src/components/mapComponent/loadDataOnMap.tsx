@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { InfoWindow, useMap } from '@vis.gl/react-google-maps';
 import { mapNumberToColor } from '@/utils/mapNumberToColor';
-import { getPoliceReportByDate } from '@/services/policeReportService';
 import { Typography } from '@mui/material';
 import { NumericFormat } from 'react-number-format';
-import { InfoWindowContent, PoliceReportList } from '@/interfaces/policeReport';
+import { InfoWindowContent } from '@/interfaces/policeReport';
 const WHITE_COLOR_RGB: [number, number, number] = [255, 255, 255];
 const ORANG_COLOR_RGB: [number, number, number] = [255, 87, 34];
 
-export function LoadDataOnMap() {
+export function LoadDataOnMap({ reportData }: { reportData: any }) {
   const map = useMap();
   const latLong: any = { lat: 52.52, lng: 13.405 };
   const initinfoContent = {
@@ -21,19 +20,13 @@ export function LoadDataOnMap() {
     color_level: 0,
   };
   const [infoWindowPosition, setinfoWindowPosition] = React.useState(latLong);
-  const [reportData, setReportData] = React.useState<PoliceReportList>();
+  // const [reportData, setReportData] = React.useState<PoliceReportList>();
   const [infoContent, setinfoContent] =
     React.useState<InfoWindowContent>(initinfoContent);
   const [isInfoWindowVisible, setIsInfoWindowVisible] = React.useState(false);
   const isGeoJsonLoaded = React.useRef(false);
 
-  React.useEffect(() => {
-    const getReport = async () => {
-      const reports = await getPoliceReportByDate();
-      setReportData(reports.lor_stats);
-    };
-    getReport();
-  }, []);
+  
   React.useEffect(() => {
     if (map && !isGeoJsonLoaded.current && reportData) {
       map?.data.loadGeoJson(
