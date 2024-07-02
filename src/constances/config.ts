@@ -30,6 +30,7 @@ export const CONFIG: {
     PageRoute.MyBikesPage.path,
     PageRoute.UserReportsPage.path,
     PageRoute.profile.path,
+    PageRoute.login.path,
   ],
   PageRoute: PageRoute,
 };

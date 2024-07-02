@@ -1,16 +1,25 @@
-import { Box, Grid, Typography, useTheme } from '@mui/material';
+import { Box, Grid, Typography, useTheme, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import BikeCard from '../bikeCard/bikeCard';
 import { useEffect, useState } from 'react';
 import { CONFIG } from '@/constances/config';
 import { fetchWrapper } from '@/utils/fetchWrapper';
 import { Bicycle } from '@/interfaces/bike';
+
 export default function MyBikesList() {
   const [bikes, setBikes] = useState<Bicycle[]>([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const theme = useTheme();
+  const navigate = useNavigate();
+
   useEffect(() => {
+    const checkAuthStatus = () => {
+      const token = localStorage.getItem('jwt');
+      setIsAuthenticated(!!token);
+    };
+
     const fetchBikes = async () => {
       try {
         const userId = localStorage.getItem('user_id');
@@ -28,8 +37,29 @@ export default function MyBikesList() {
       }
     };
 
-    fetchBikes();
-  }, []);
+    checkAuthStatus();
+    if (isAuthenticated) {
+      fetchBikes();
+    }
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated) {
+    return (
+      <Box component='div' sx={{ textAlign: 'center', marginTop: 3 }}>
+        <Typography variant='h6' color='text.secondary'>
+          You need to log in to access this functionality.
+        </Typography>
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={() => navigate(CONFIG.PageRoute.login.path)}
+          sx={{ marginTop: 2 }}
+        >
+          Go to Login
+        </Button>
+      </Box>
+    );
+  }
 
   return (
     <>
