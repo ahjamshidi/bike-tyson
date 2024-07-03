@@ -46,7 +46,7 @@ export default function CustomModal({
               {modalCloseElement}
             </Box>
             <Divider component="div" />
-            <Box component="div" sx={{ width: '100%', p: 0, height: '100%' }}>
+            <Box component="div" sx={{ width: '100%', p: 0}}>
               {children}
             </Box>
           </ModalContent>
@@ -97,7 +97,7 @@ const StyledBackdrop = styled(Backdrop)`
 const ModalContent = styled('div')(
   ({ theme }) => css`
     width: 100%;
-    height: 80%;
+    
     font-weight: 500;
     text-align: start;
     position: relative;

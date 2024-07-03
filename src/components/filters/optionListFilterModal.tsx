@@ -11,18 +11,7 @@ export interface IOptionListFilterModal {
 }
 
 export function OptionListFilterModal(props: IOptionListFilterModal) {
-  const {
-    optionSelect,
-    optionList,
-    defaultValue,
-    relatedFilterName,
-    triggerFilterName,
-  } = props;
-  // const [filterTitle, setFilterTitle] = useState('');
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // if (filterTitle === event.target.value) setFilterTitle('');
-    // else setFilterTitle(event.target.value);
-  };
+  const { optionSelect, optionList, defaultValue, relatedFilterName } = props;
 
   return (
     <>

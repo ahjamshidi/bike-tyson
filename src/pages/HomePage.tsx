@@ -6,10 +6,7 @@ import { ShowMarkersOnMap } from '@/components/mapComponent/showMarkersOnMap';
 import { CONFIG } from '@/constances/config';
 import { PoliceReportList } from '@/interfaces/policeReport';
 import { UserReport } from '@/interfaces/userReport';
-import {
-  getAllReportByDate,
-  getPoliceReportByDate,
-} from '@/services/policeReportService';
+import { getAllReportByDate } from '@/services/policeReportService';
 import AddIcon from '@mui/icons-material/Add';
 import { Box, CircularProgress, Fab, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
