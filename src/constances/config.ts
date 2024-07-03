@@ -17,6 +17,7 @@ export const CONFIG: {
   appName: string;
   BaseURL: string;
   BikeImgPlaceholder: string;
+  BicycleBucketName: string;
   GoogleLogin: string;
   MainPages: string[];
   PageRoute: PageRouteType;
@@ -24,6 +25,8 @@ export const CONFIG: {
   appName: 'BikeTyson',
   BaseURL: process.env.BACKENDURL || 'http://localhost:3000',
   BikeImgPlaceholder: '/placeholder_biketyson.png',
+  BicycleBucketName:
+    process.env.BICYCLE_BUCKET_NAME || 'byketyson-bicycle-photos',
   GoogleLogin: process.env.BACKENDURL + '/auth/google',
   MainPages: [
     PageRoute.HomePage.path,
