@@ -82,6 +82,10 @@ const ProfilePage = ({
     );
   }
 
+  const formatDate = (dateString: string) => {
+    return new Intl.DateTimeFormat('en-UK').format(new Date(dateString));
+  };
+
   return (
     <>
       <Box
@@ -154,7 +158,7 @@ const ProfilePage = ({
                   <ListItemIcon>
                     <CalendarTodayIcon />
                   </ListItemIcon>
-                  <ListItemText primary={user.date_of_birth} />
+                  <ListItemText primary={formatDate(user.date_of_birth)} />
                 </ListItem>
               )}
             </List>

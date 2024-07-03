@@ -53,7 +53,7 @@ export default function MyBikesList() {
           variant='contained'
           color='primary'
           onClick={() => navigate(CONFIG.PageRoute.login.path)}
-          sx={{ marginTop: 2 }}
+          sx={{ marginTop: 2, height: '50px' }}
         >
           Go to Login
         </Button>
