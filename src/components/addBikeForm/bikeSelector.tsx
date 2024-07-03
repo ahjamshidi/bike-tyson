@@ -16,21 +16,16 @@ export function BikeSelector({
     <Autocomplete
       id="bike-select-demo"
       fullWidth
-      // value={inputValue}
       options={bikes}
       autoHighlight
-      onChange={(e) => {
+      onChange={(e: React.BaseSyntheticEvent) => {
         onChangeHandler({
-          // target: { name: 'bike_id', value: e.target.value },
-          target: { name: 'bike_id', value: e.target },
+          target: { name: 'bike_id', value: e.target.value },
         });
       }}
-      onInputChange={() => {
-        // console.log('onInputChange ');
-      }}
+      onInputChange={() => {}}
       getOptionLabel={(option: Bicycle) => option.name}
       renderOption={(props, option) => {
-        // const { key, ...rest } = props;
         return (
           <Box
             value={option.id}
@@ -60,13 +55,10 @@ export function BikeSelector({
             name="bike_id"
             required
             value={inputValue}
-            onChange={() => {
-              // console.log('TextField onChange');
-              // onChangeHandler();
-            }}
+            onChange={() => {}}
             inputProps={{
               ...params.inputProps,
-              autoComplete: 'off', // disable autocomplete and autofill
+              autoComplete: 'off',
             }}
           />
         );

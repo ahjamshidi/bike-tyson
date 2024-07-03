@@ -21,6 +21,7 @@ import { MapCameraChangedEvent } from '@vis.gl/react-google-maps';
 import { Dayjs } from 'dayjs';
 import { fetchWrapper } from '@/utils/fetchWrapper';
 import { CONFIG } from '@/constances/config';
+import { useNavigate } from 'react-router-dom';
 interface FormErrors {
   user_id?: string;
   bike_id?: string;
@@ -54,7 +55,7 @@ export function StolenBikeForm() {
   const [errors, setErrors] = React.useState<FormErrors>({});
   const [bikeList, setBikeList] = React.useState([]);
   const [formSubmitMsg, setFormSubmitMsg] = React.useState('');
-
+  const navigate = useNavigate();
   React.useEffect(() => {
     const fetchBikes = async () => {
       try {
@@ -109,6 +110,7 @@ export function StolenBikeForm() {
           console.log(response);
           setFormData(initFormValue);
           setFormSubmitMsg('Your Report has been submitted');
+          navigate(`${CONFIG.PageRoute.MyBikesList.path}`);
         });
     } else {
       console.log('Form has errors', formErrors);
@@ -224,8 +226,8 @@ export function StolenBikeForm() {
         >
           <Box
             sx={{
-              width:'100%',
-              height:'70vh'
+              width: '100%',
+              height: '70vh',
             }}
           >
             <CustomMap

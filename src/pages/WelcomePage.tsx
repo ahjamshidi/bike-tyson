@@ -109,7 +109,7 @@ const WelcomePage: React.FC = () => {
             sx={{
               backgroundColor: theme.palette.primary.dark,
               marginRight: '10px',
-              width: '150px',
+              width: '140px',
               height: '50px',
             }}
             onClick={handleLoginPage}
@@ -120,7 +120,7 @@ const WelcomePage: React.FC = () => {
             variant="contained"
             sx={{
               backgroundColor: 'black',
-              width: '150px',
+              width: '140px',
               height: '50px',
             }}
             onClick={handleVisitApp}

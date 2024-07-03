@@ -1,3 +1,5 @@
+import { UserReport } from './userReport';
+
 export interface Bicycle {
   id?: string;
   user_id?: number;
@@ -12,6 +14,7 @@ export interface Bicycle {
   gender: string;
   description: string | null;
   photos_url: string[];
+  reports?: UserReport[];
   owner: boolean;
 }
 
