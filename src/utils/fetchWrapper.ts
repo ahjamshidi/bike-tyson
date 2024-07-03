@@ -23,10 +23,11 @@ function post(url: string, body: Object, headers: any = {}) {
   return fetch(url, requestOptions).then(handleResponse);
 }
 
-function put(url: string, body: Object) {
+function put(url: string, body: Object, headers: any = {}) {
+  headers['Content-Type'] = 'application/json';
   const requestOptions = {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: headers,
     body: JSON.stringify(body),
   };
   return fetch(url, requestOptions).then(handleResponse);

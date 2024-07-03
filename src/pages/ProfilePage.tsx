@@ -47,9 +47,6 @@ const ProfilePage = ({
           },
         });
 
-        console.log(response);
-        console.log(token);
-
         if (!response.ok) {
           throw new Error('Failed to fetch user profile');
         }
@@ -75,10 +72,10 @@ const ProfilePage = ({
   if (!user) {
     return (
       <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="100vh"
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
+        height='100vh'
       >
         <Typography>Loading...</Typography>
       </Box>
@@ -104,18 +101,18 @@ const ProfilePage = ({
         }}
       >
         <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          height="100%"
+          display='flex'
+          flexDirection='column'
+          alignItems='center'
+          justifyContent='center'
+          height='100%'
           p={2}
-          bgcolor="background.paper"
+          bgcolor='background.paper'
         >
-          <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>
+          <Typography variant='h4' gutterBottom sx={{ fontWeight: 'bold' }}>
             Hello
           </Typography>
-          <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
+          <Typography variant='h5' gutterBottom sx={{ fontWeight: 'bold' }}>
             {user.first_name} {user.last_name}
           </Typography>
           <Avatar
@@ -177,8 +174,8 @@ const ProfilePage = ({
             }}
           >
             <Button
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               sx={{ height: '50px', flex: 1, mr: 1 }}
               onClick={() =>
                 navigate(`${CONFIG.PageRoute.editUser.path}`, {
@@ -189,8 +186,8 @@ const ProfilePage = ({
               Edit
             </Button>
             <Button
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               sx={{ height: '50px', flex: 1, ml: 1 }}
               onClick={handleLogout}
             >
@@ -198,7 +195,7 @@ const ProfilePage = ({
             </Button>
           </Box>
           {error && (
-            <Alert severity="error" sx={{ width: '100%', mt: 2 }}>
+            <Alert severity='error' sx={{ width: '100%', mt: 2 }}>
               {error}
             </Alert>
           )}
