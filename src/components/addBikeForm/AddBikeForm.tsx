@@ -32,6 +32,7 @@ export default function AddBikeForm() {
     owner: true,
   });
 
+  const [files, setFiles] = useState<FileList | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -52,15 +53,42 @@ export default function AddBikeForm() {
     }));
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFiles(e.target.files);
+  };
+
   const handleCreateBike = async () => {
     try {
       await fetchWrapper
         .post(`${CONFIG.BaseURL}/api/bicycles`, bikeData)
-        .then(() => {
+        .then(async (bikeResponse) => {
           setSuccess('Bike added successfully.');
           setTimeout(() => {
             setSuccess(null);
           }, 3000);
+
+          if (files && files.length > 0) {
+            const formData = new FormData();
+            for (let i = 0; i < files.length; i++) {
+              formData.append('photos', files[i]);
+            }
+            formData.append('itemId', bikeResponse.id); // Add the itemId to the form data
+            formData.append('bucketName', CONFIG.BicycleBucketName); // Add the bucket name
+
+            const photoResponse = await fetch(
+              `${CONFIG.BaseURL}/api/photos/upload`,
+              {
+                method: 'POST',
+                body: formData,
+              }
+            );
+
+            if (!photoResponse.ok) {
+              throw new Error('Failed to upload photos');
+            }
+
+            console.log('Photos uploaded successfully');
+          }
         })
         .catch((error) => {
           console.error('Failed to add bike:', error);
@@ -91,12 +119,11 @@ export default function AddBikeForm() {
             <Button
               className='photos_url'
               component='label'
-              role={undefined}
               variant='contained'
-              tabIndex={-1}
               startIcon={<CloudUploadIcon />}
             >
               Bike image
+              <input type='file' hidden multiple onChange={handleFileChange} />
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
