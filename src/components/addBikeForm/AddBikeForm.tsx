@@ -14,6 +14,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Bicycle } from '@/interfaces/bike';
 import { CONFIG } from '@/constances/config';
 import { fetchWrapper } from '@/utils/fetchWrapper';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddBikeForm() {
   const [bikeData, setBikeData] = useState<Bicycle>({
@@ -35,6 +36,7 @@ export default function AddBikeForm() {
   const [files, setFiles] = useState<FileList | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleChange = (e: { target: { name: string; value: any } }) => {
     const { name, value } = e.target;
@@ -62,11 +64,6 @@ export default function AddBikeForm() {
       await fetchWrapper
         .post(`${CONFIG.BaseURL}/api/bicycles`, bikeData)
         .then(async (bikeResponse) => {
-          setSuccess('Bike added successfully.');
-          setTimeout(() => {
-            setSuccess(null);
-          }, 3000);
-
           if (files && files.length > 0) {
             const formData = new FormData();
             for (let i = 0; i < files.length; i++) {
@@ -84,7 +81,18 @@ export default function AddBikeForm() {
             );
 
             if (!photoResponse.ok) {
+              console.error('Failed to upload photos', error);
+              setError('Failed to upload photos');
+              setTimeout(() => {
+                setError(null);
+              }, 3000);
               throw new Error('Failed to upload photos');
+            } else {
+              setSuccess('Bike added successfully.');
+              setTimeout(() => {
+                setSuccess(null);
+                navigate('/my-bikes-list');
+              }, 3000);
             }
 
             console.log('Photos uploaded successfully');
