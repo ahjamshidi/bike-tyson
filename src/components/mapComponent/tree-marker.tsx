@@ -2,7 +2,7 @@ import { Bike } from './bikes';
 import type { Marker } from '@googlemaps/markerclusterer';
 import { useCallback } from 'react';
 import { AdvancedMarker } from '@vis.gl/react-google-maps';
-
+import DirectionsBikeRoundedIcon from '@mui/icons-material/DirectionsBikeRounded';
 export type BikeMarkerProps = {
   bike: Bike;
   onClick: (tree: Bike) => void;
@@ -24,7 +24,7 @@ export const BikeMarker = (props: BikeMarkerProps) => {
 
   return (
     <AdvancedMarker position={bike.position} ref={ref} onClick={handleClick}>
-      <span className="marker-clustering-tree">🌳</span>
+      <DirectionsBikeRoundedIcon className="marker-clustering-tree" color='primary' sx={{fontSize:40}}/>
     </AdvancedMarker>
   );
 };

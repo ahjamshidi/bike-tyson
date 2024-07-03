@@ -1,15 +1,17 @@
-import { Bicycle } from "@/interfaces/bike.ts";
+import { Bicycle } from '@/interfaces/bike.ts';
 
 export interface UserReport {
-    id?: number;
-    user_id: number;
-    bike_id?: number;
-    bicycle?: Bicycle;
-    start_datetime: Date,
-    end_datetime: Date,
-    gps: string,
-    description: string,
-    created_at?: Date,
-    updated_at?: Date,
-    owner?: boolean
+  id?: number;
+  user_id: number;
+  bike_id?: number;
+  bicycle?: Bicycle;
+  start_datetime: Date;
+  end_datetime: Date;
+  gps: string;
+  lat?: number;
+  lng?: number;
+  description: string;
+  created_at?: Date;
+  updated_at?: Date;
+  owner?: boolean;
 }

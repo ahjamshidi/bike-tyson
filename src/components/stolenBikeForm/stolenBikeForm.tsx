@@ -222,29 +222,36 @@ export function StolenBikeForm() {
           modalTitle="Choos location on map"
           modalCloseElement={<span onClick={closeModal}>OK</span>}
         >
-          <CustomMap
-            defaultCenter={{ lat: 52.52, lng: 13.405 }}
-            handleCenterChanged={getMarkerLocation}
+          <Box
+            sx={{
+              width:'100%',
+              height:'70vh'
+            }}
           >
-            <Box
-              sx={{
-                position: 'absolute',
-                bottom: 'calc(50% - 30px)',
-                right: 'calc(50% - 30px)',
-              }}
+            <CustomMap
+              defaultCenter={{ lat: 52.52, lng: 13.405 }}
+              handleCenterChanged={getMarkerLocation}
             >
-              <LocationOnRoundedIcon
+              <Box
                 sx={{
-                  width: 60,
-                  height: 60,
-                  color: theme.palette.primary.dark,
+                  position: 'absolute',
+                  bottom: 'calc(50% - 30px)',
+                  right: 'calc(50% - 30px)',
                 }}
-              />
-            </Box>
-            <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
-              <CurrentLocation></CurrentLocation>
-            </Box>
-          </CustomMap>
+              >
+                <LocationOnRoundedIcon
+                  sx={{
+                    width: 60,
+                    height: 60,
+                    color: theme.palette.primary.dark,
+                  }}
+                />
+              </Box>
+              <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
+                <CurrentLocation></CurrentLocation>
+              </Box>
+            </CustomMap>
+          </Box>
         </CustomModal>
       </Box>
     </>

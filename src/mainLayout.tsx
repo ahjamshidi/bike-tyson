@@ -56,7 +56,7 @@ export function MainLayout({ pageTitle }: { pageTitle: string }) {
           </Toolbar>
         </AppBar>
       )}
-      <Container maxWidth="sm" sx={{ padding: 0 }}>
+      <Container maxWidth="sm" sx={{ padding: 0 ,position:'relative'}}>
         <Outlet />
       </Container>
       <AppBottomNavigation />

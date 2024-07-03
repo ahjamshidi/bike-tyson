@@ -28,6 +28,7 @@ export default function AppBottomNavigation() {
         }}
       >
         <BottomNavigationAction
+          sx={{ maxWidth: 125 }}
           label="Explore"
           icon={<FmdGoodRoundedIcon />}
           value={routeNames.HomePage.path}
@@ -36,16 +37,19 @@ export default function AppBottomNavigation() {
           label="Bikes"
           icon={<DirectionsBikeRoundedIcon />}
           value={routeNames.MyBikesPage.path}
+          sx={{ maxWidth: 125 }}
         />
         <BottomNavigationAction
           label="Reports"
           icon={<ListAltRoundedIcon />}
           value={routeNames.UserReportsPage.path}
+          sx={{ maxWidth: 125 }}
         />
         <BottomNavigationAction
           label="Profile"
           icon={<AccountCircleRoundedIcon />}
           value={routeNames.profile.path}
+          sx={{ maxWidth: 125 }}
         />
       </BottomNavigation>
     </Box>
