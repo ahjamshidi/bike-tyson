@@ -88,48 +88,48 @@ export default function UserReportsList() {
 
   return (
     <>
-      <Box component="div" sx={{ marginBottom: 2, marginTop: 1 }}>
+      <Box component='div' sx={{ marginBottom: 2, marginTop: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <FormControl fullWidth>
-              <InputLabel id="time-filter-label">Time</InputLabel>
+              <InputLabel id='time-filter-label'>Time</InputLabel>
               <Select
-                labelId="time-filter-label"
+                labelId='time-filter-label'
                 value={timeFilter}
-                label="Time"
+                label='Time'
                 onChange={handleTimeFilterChange}
               >
-                <MenuItem value="last24h">Last 24h</MenuItem>
-                <MenuItem value="lastWeek">Last Week</MenuItem>
-                <MenuItem value="lastMonth">Last Month</MenuItem>
-                <MenuItem value="lastYear">Last Year</MenuItem>
+                <MenuItem value='last24h'>Last 24h</MenuItem>
+                <MenuItem value='lastWeek'>Last Week</MenuItem>
+                <MenuItem value='lastMonth'>Last Month</MenuItem>
+                <MenuItem value='lastYear'>Last Year</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={4}>
             <FormControl fullWidth>
-              <InputLabel id="date-type-filter-label">Date Type</InputLabel>
+              <InputLabel id='date-type-filter-label'>Date Type</InputLabel>
               <Select
-                labelId="date-type-filter-label"
+                labelId='date-type-filter-label'
                 value={dateTypeFilter}
-                label="Date Type"
+                label='Date Type'
                 onChange={handleDateTypeFilterChange}
               >
-                <MenuItem value="created_at">Created At</MenuItem>
-                <MenuItem value="last_stolen">Last Stolen</MenuItem>
+                <MenuItem value='created_at'>Created At</MenuItem>
+                <MenuItem value='last_stolen'>Last Stolen</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={4}>
             <FormControl fullWidth>
-              <InputLabel id="brand-filter-label">Brand</InputLabel>
+              <InputLabel id='brand-filter-label'>Brand</InputLabel>
               <Select
-                labelId="brand-filter-label"
+                labelId='brand-filter-label'
                 value={brandFilter}
-                label="Brand"
+                label='Brand'
                 onChange={handleBrandFilterChange}
               >
-                <MenuItem value="">All Brands</MenuItem>
+                <MenuItem value=''>All Brands</MenuItem>
                 {Array.from(
                   new Set(userReports.map((report) => report?.bicycle?.brand))
                 ).map((brand) => (
@@ -142,7 +142,7 @@ export default function UserReportsList() {
           </Grid>
         </Grid>
       </Box>
-      <Box component="div">
+      <Box component='div'>
         <Grid container rowSpacing={2}>
           {filteredReports &&
             filteredReports.map((userReport: UserReport) => (

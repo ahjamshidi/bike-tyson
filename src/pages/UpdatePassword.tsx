@@ -30,25 +30,15 @@ const UpdatePassword: React.FC = () => {
           code,
           password,
         })
-        .then((response: any) => {
-          if (response.ok) {
-            setSuccess(
-              'Password updated successfully. Redirecting to login...'
-            );
-            setTimeout(() => {
-              navigate('/login', { replace: true });
-            }, 3000);
-          } else {
-            const errorData = response.json();
-            setError(errorData.message || 'Failed to update password.');
-            setTimeout(() => {
-              setError(null);
-            }, 3000);
-          }
+        .then(() => {
+          setSuccess('Password updated successfully. Redirecting to login...');
+          setTimeout(() => {
+            navigate('/login', { replace: true });
+          }, 3000);
         })
         .catch((error) => {
           console.error('Failed to update password:', error);
-          setError('An unexpected error occurred. Please try again.');
+          setError('Failed to update password.');
           setTimeout(() => {
             setError(null);
           }, 3000);
@@ -109,7 +99,7 @@ const UpdatePassword: React.FC = () => {
           fullWidth
           variant='contained'
           color='primary'
-          sx={{ mt: 2 }}
+          sx={{ mt: 2, mb: 2, height: '50px' }}
           onClick={handleUpdatePassword}
         >
           Update Password

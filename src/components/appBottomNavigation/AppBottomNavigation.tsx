@@ -9,6 +9,7 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CONFIG } from '@/constances/config';
 export default function AppBottomNavigation() {
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const routeNames = CONFIG.PageRoute;
@@ -17,6 +18,17 @@ export default function AppBottomNavigation() {
     ? location.pathname
     : '';
   const [value, setValue] = React.useState(initpath);
+
+  // Function to check authentication status
+  const checkAuthStatus = () => {
+    const token = localStorage.getItem('jwt');
+    setIsAuthenticated(!!token);
+  };
+
+  React.useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
   return (
     <Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 2 }}>
       <BottomNavigation
@@ -24,7 +36,7 @@ export default function AppBottomNavigation() {
         value={value}
         onChange={(_event, newValue) => {
           setValue(newValue);
-          navigate(newValue, { replace: true });
+          navigate(newValue);
         }}
       >
         <BottomNavigationAction
@@ -34,21 +46,23 @@ export default function AppBottomNavigation() {
           value={routeNames.HomePage.path}
         />
         <BottomNavigationAction
-          label="Bikes"
+          label='Bikes'
           icon={<DirectionsBikeRoundedIcon />}
           value={routeNames.MyBikesPage.path}
           sx={{ maxWidth: 125 }}
         />
         <BottomNavigationAction
-          label="Reports"
+          label='Reports'
           icon={<ListAltRoundedIcon />}
           value={routeNames.UserReportsPage.path}
           sx={{ maxWidth: 125 }}
         />
         <BottomNavigationAction
-          label="Profile"
+          label={isAuthenticated ? 'Profile' : 'Login'}
           icon={<AccountCircleRoundedIcon />}
-          value={routeNames.profile.path}
+          value={
+            isAuthenticated ? routeNames.profile.path : routeNames.login.path
+          }
           sx={{ maxWidth: 125 }}
         />
       </BottomNavigation>
