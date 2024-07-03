@@ -1,23 +1,23 @@
-import { Box } from '@mui/material';
-import { CustomFilter } from './filter';
-import CustomModal from '../modal/customModal';
-import useModal from '@/hooks/useModal';
-import { useState } from 'react';
-
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 export interface IOptionListFilterModal {
   optionList: { label: string; value: any }[];
   defaultValue?: any;
   relatedFilterName: string;
+  triggerFilterName: string;
   optionSelect: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function OptionListFilterModal(props: IOptionListFilterModal) {
-  const { optionSelect, optionList, defaultValue, relatedFilterName } = props;
+  const {
+    optionSelect,
+    optionList,
+    defaultValue,
+    relatedFilterName,
+    triggerFilterName,
+  } = props;
   // const [filterTitle, setFilterTitle] = useState('');
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // if (filterTitle === event.target.value) setFilterTitle('');
@@ -28,8 +28,7 @@ export function OptionListFilterModal(props: IOptionListFilterModal) {
     <>
       <FormControl>
         <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue={defaultValue}
+          value={defaultValue}
           name="radio-buttons-group"
           sx={{ pl: 2 }}
           onChange={optionSelect}
@@ -37,6 +36,7 @@ export function OptionListFilterModal(props: IOptionListFilterModal) {
           {optionList &&
             optionList.map((option) => (
               <FormControlLabel
+                key={option.value}
                 value={option.value}
                 name={relatedFilterName}
                 control={<Radio />}

@@ -3,7 +3,7 @@ import bikes from './trees.json';
 export type Bike = {
   key: string;
   name: string;
-  category: string;
+  category?: string;
   position: google.maps.LatLngLiteral;
 };
 

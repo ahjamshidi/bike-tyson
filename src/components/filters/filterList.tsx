@@ -13,13 +13,15 @@ export interface ICustomFilterListProps {
   setFilterOption: Dispatch<SetStateAction<any>>;
 }
 interface filterType {
-  name: string;
-  value: any;
+  [key: string]: any;
 }
 export function CustomFilterList(props: ICustomFilterListProps) {
   const { filterList, setFilterOption } = props;
   const { isOpen, openModal, closeModal } = useModal();
   const [filterTitle, setFilterTitle] = useState('');
+  const [selectedFilterTitle, setSelectedFilterTitle] = useState<
+    filterType | undefined
+  >();
   const openHandler = (title: string) => {
     setFilterTitle(title);
     openModal();
@@ -28,6 +30,10 @@ export function CustomFilterList(props: ICustomFilterListProps) {
     setFilterOption((prev: filterType | undefined) => {
       return { ...prev, [event.target.name]: event.target.value };
     });
+    setSelectedFilterTitle((prev: filterType | undefined) => {
+      return { ...prev, [event.target.name]: event.target.value };
+    });
+
     closeModal();
   };
   return (
@@ -36,7 +42,12 @@ export function CustomFilterList(props: ICustomFilterListProps) {
         {filterList &&
           filterList.map((filter) => (
             <CustomFilter
-              filterName={filter.name}
+              key={filter.name}
+              filterName={
+                selectedFilterTitle && selectedFilterTitle[filter.field]
+                  ? filter.name + ':' + selectedFilterTitle[filter.field]
+                  : filter.name
+              }
               clickHandler={() => {
                 openHandler(filter.name);
               }}
@@ -55,10 +66,16 @@ export function CustomFilterList(props: ICustomFilterListProps) {
             return (
               filterTitle === filter.name && (
                 <OptionListFilterModal
+                  key={filter.name}
+                  triggerFilterName={filter.name}
                   optionSelect={filterSelectHandler}
                   optionList={filter.filterOption}
                   relatedFilterName={filter.field}
-                  defaultValue=""
+                  defaultValue={
+                    selectedFilterTitle && selectedFilterTitle[filter.field]
+                      ? selectedFilterTitle[filter.field]
+                      : ''
+                  }
                 ></OptionListFilterModal>
               )
             );
