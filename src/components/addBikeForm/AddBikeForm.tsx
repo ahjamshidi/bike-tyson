@@ -274,7 +274,7 @@ export default function AddBikeForm() {
               type='number'
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position='start'>$</InputAdornment>
+                  <InputAdornment position='start'>€</InputAdornment>
                 ),
                 inputProps: {
                   min: 0,
