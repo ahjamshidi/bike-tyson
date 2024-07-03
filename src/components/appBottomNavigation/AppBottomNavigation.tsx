@@ -40,7 +40,8 @@ export default function AppBottomNavigation() {
         }}
       >
         <BottomNavigationAction
-          label='Explore'
+          sx={{ maxWidth: 125 }}
+          label="Explore"
           icon={<FmdGoodRoundedIcon />}
           value={routeNames.HomePage.path}
         />
@@ -48,11 +49,13 @@ export default function AppBottomNavigation() {
           label='Bikes'
           icon={<DirectionsBikeRoundedIcon />}
           value={routeNames.MyBikesPage.path}
+          sx={{ maxWidth: 125 }}
         />
         <BottomNavigationAction
           label='Reports'
           icon={<ListAltRoundedIcon />}
           value={routeNames.UserReportsPage.path}
+          sx={{ maxWidth: 125 }}
         />
         <BottomNavigationAction
           label={isAuthenticated ? 'Profile' : 'Login'}
@@ -60,6 +63,7 @@ export default function AppBottomNavigation() {
           value={
             isAuthenticated ? routeNames.profile.path : routeNames.login.path
           }
+          sx={{ maxWidth: 125 }}
         />
       </BottomNavigation>
     </Box>

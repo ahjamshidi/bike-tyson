@@ -3,13 +3,11 @@ import {
   Map,
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps';
-// import { LoadDataOnMap } from './loadDataOnMap';
-// import { ShowMarkersOnMap } from './showMarkersOnMap';
 
 export function CustomMap({
   children,
   defaultCenter = { lat: 52.52, lng: 13.405 },
-  handleCenterChanged
+  handleCenterChanged,
 }: {
   children: React.ReactElement[];
   defaultCenter?: { lat: number; lng: number };
@@ -24,11 +22,10 @@ export function CustomMap({
         defaultZoom={12}
         gestureHandling={'greedy'}
         disableDefaultUI={true}
-        reuseMaps={true}
+        reuseMaps={false}
         onCenterChanged={handleCenterChanged}
       />
       {children}
-      {/* <ShowMarkersOnMap /> */}
     </APIProvider>
   );
 }
