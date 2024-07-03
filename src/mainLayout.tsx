@@ -49,17 +49,21 @@ export function MainLayout({ pageTitle }: { pageTitle: string }) {
             <Typography
               variant="h6"
               component="h1"
-              sx={{ width: '100%', textAlign: 'center',textTransform: "uppercase" }}
+              sx={{
+                width: '100%',
+                textAlign: 'center',
+                textTransform: 'uppercase',
+              }}
             >
               {pageTitle}
             </Typography>
           </Toolbar>
         </AppBar>
       )}
-      <Container maxWidth="sm" sx={{ padding: 0 }}>
+      <Container maxWidth="sm" sx={{ padding: 0, position: 'relative' }}>
         <Outlet />
+        <AppBottomNavigation />
       </Container>
-      <AppBottomNavigation />
     </>
   );
 }

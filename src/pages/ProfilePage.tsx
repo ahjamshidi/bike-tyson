@@ -47,6 +47,9 @@ const ProfilePage = ({
           },
         });
 
+        console.log(response);
+        console.log(token);
+
         if (!response.ok) {
           throw new Error('Failed to fetch user profile');
         }
@@ -62,6 +65,13 @@ const ProfilePage = ({
     fetchUserProfile();
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('user_id');
+    localStorage.setItem('isVisited', 'false');
+    navigate(CONFIG.PageRoute.welcome.path);
+  };
+
   if (!user) {
     return (
       <Box
@@ -74,6 +84,10 @@ const ProfilePage = ({
       </Box>
     );
   }
+
+  const formatDate = (dateString: string) => {
+    return new Intl.DateTimeFormat('en-UK').format(new Date(dateString));
+  };
 
   return (
     <>
@@ -117,6 +131,7 @@ const ProfilePage = ({
               borderRadius: 2,
               boxShadow: 1,
               mb: 2,
+              overflowWrap: 'anywhere',
             }}
           >
             <List>
@@ -147,21 +162,41 @@ const ProfilePage = ({
                   <ListItemIcon>
                     <CalendarTodayIcon />
                   </ListItemIcon>
-                  <ListItemText primary={user.date_of_birth} />
+                  <ListItemText primary={formatDate(user.date_of_birth)} />
                 </ListItem>
               )}
             </List>
           </Box>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ mt: 2, mb: 2, height: '50px' }}
-            onClick={() =>
-              navigate(`${CONFIG.PageRoute.editUser.path}`, { state: { user } })
-            }
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '100%',
+              maxWidth: 360,
+              mb: 2,
+            }}
           >
-            Edit profile
-          </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ height: '50px', flex: 1, mr: 1 }}
+              onClick={() =>
+                navigate(`${CONFIG.PageRoute.editUser.path}`, {
+                  state: { user },
+                })
+              }
+            >
+              Edit
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ height: '50px', flex: 1, ml: 1 }}
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          </Box>
           {error && (
             <Alert severity="error" sx={{ width: '100%', mt: 2 }}>
               {error}

@@ -41,64 +41,6 @@ const UserReportDetailPage = () => {
 
   return (
     <>
-      <div style={{ width: '100%', height: '300px', marginBottom: '16px' }}>
-        <CustomMap
-          defaultCenter={{
-            lat: coordinates?.latitude || 0,
-            lng: coordinates?.longitude || 0,
-          }}
-        >
-          <></>
-          <Marker
-            position={{
-              lat: coordinates?.latitude || 0,
-              lng: coordinates?.longitude || 0,
-            }}
-          />
-        </CustomMap>
-      </div>
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent>
-          <Grid container columnSpacing={2}>
-            <Grid item xs={4}>
-              <img
-                width={'100%'}
-                height={120}
-                srcSet={`${
-                  UserReportData?.bicycle?.photos_url[0]
-                    ? UserReportData?.bicycle?.photos_url[0]
-                    : CONFIG.BikeImgPlaceholder
-                }`}
-                src={`${UserReportData?.bicycle?.photos_url[0]}`}
-                alt={`${UserReportData?.bicycle?.brand} ${UserReportData?.bicycle?.model}`}
-                loading="lazy"
-              />
-            </Grid>
-            <Grid item xs={8}>
-              <Typography variant="h6" component="div">
-                {`${UserReportData?.bicycle?.brand} ${UserReportData?.bicycle?.model}`}
-              </Typography>
-              <Typography variant="subtitle2" color="text.secondary">
-                Frame number: {UserReportData?.bicycle?.frame_num}
-              </Typography>
-              <Typography variant="subtitle2" color="text.secondary">
-                Bike colour: {UserReportData?.bicycle?.colour}
-              </Typography>
-              <Typography variant="subtitle2" color="text.secondary">
-                {
-                  <DateDisplay
-                    date={UserReportData?.created_at || new Date()}
-                  />
-                }
-              </Typography>
-              <Typography variant="subtitle2" color="text.secondary">
-                Description: {UserReportData.description}
-              </Typography>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
-
       <Box component="div" sx={{ marginBottom: 2, marginTop: 1 }}>
         <div style={{ width: '100%', height: '300px', marginBottom: '16px' }}>
           <CustomMap

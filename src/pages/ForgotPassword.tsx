@@ -24,23 +24,15 @@ const ForgotPassword: React.FC = () => {
     try {
       fetchWrapper
         .post(`${CONFIG.BaseURL}/auth/send-reset-code`, { email })
-        .then((response: any) => {
-          if (response.ok) {
-            setSuccess('Reset code sent to your email.');
-            setTimeout(() => {
-              navigate('/reset-code', { state: { email } });
-            }, 3000);
-          } else {
-            const errorData = response.json();
-            setError(errorData.message || 'Failed to send reset code.');
-            setTimeout(() => {
-              setError(null);
-            }, 3000);
-          }
+        .then(() => {
+          setSuccess('Reset code sent to your email.');
+          setTimeout(() => {
+            navigate('/reset-code', { state: { email } });
+          }, 3000);
         })
         .catch((error) => {
           console.error('Failed to send reset code:', error);
-          setError('An unexpected error occurred. Please try again.');
+          setError(error || 'Failed to send reset code.');
           setTimeout(() => {
             setError(null);
           }, 3000);

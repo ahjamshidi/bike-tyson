@@ -1,16 +1,25 @@
-import { Box, Grid, Typography, useTheme } from '@mui/material';
+import { Box, Grid, Typography, useTheme, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import BikeCard from '../bikeCard/bikeCard';
 import { useEffect, useState } from 'react';
 import { CONFIG } from '@/constances/config';
 import { fetchWrapper } from '@/utils/fetchWrapper';
 import { Bicycle } from '@/interfaces/bike';
+
 export default function MyBikesList() {
   const [bikes, setBikes] = useState<Bicycle[]>([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const theme = useTheme();
+  const navigate = useNavigate();
+
   useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    const checkAuthStatus = () => {
+      setIsAuthenticated(!!token);
+    };
+
     const fetchBikes = async () => {
       try {
         const userId = localStorage.getItem('user_id');
@@ -18,9 +27,11 @@ export default function MyBikesList() {
           console.error('User is not authenticated');
           return;
         }
-
         const response = await fetchWrapper.get(
-          `${CONFIG.BaseURL}/api/bicycles/user/${userId}`
+          `${CONFIG.BaseURL}/api/bicycles/user/${userId}`,
+          {
+            Authorization: `Bearer ${token}`,
+          }
         );
         setBikes(response);
       } catch (error) {
@@ -28,12 +39,34 @@ export default function MyBikesList() {
       }
     };
 
-    fetchBikes();
-  }, []);
+    checkAuthStatus();
+    if (isAuthenticated) {
+      fetchBikes();
+    }
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated) {
+    return (
+      <Box component="div" sx={{ textAlign: 'center', height:'100%',display:'flex',alignItems:'center',flexDirection:'column',justifyContent:'center' }}>
+        <Typography variant="h6" color="text.secondary">
+          You need to log in to access this functionality.
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          onClick={() => navigate(CONFIG.PageRoute.login.path)}
+          sx={{ marginTop: 2, height: '50px' }}
+        >
+          Login
+        </Button>
+      </Box>
+    );
+  }
 
   return (
     <>
-      <Box component='div'>
+      <Box component="div">
         <Grid
           item
           xs={12}
@@ -47,12 +80,12 @@ export default function MyBikesList() {
               justifyContent: 'space-between',
             }}
           >
-            <Typography sx={{}} color='text.secondary'>
+            <Typography sx={{}} color="text.secondary">
               Add your new bikes.
             </Typography>
             <Link to={CONFIG.PageRoute.AddBikePage.path}>
               <Fab
-                size='medium'
+                size="medium"
                 sx={{
                   borderRadius: '20%',
                   backgroundColor: '#fff',

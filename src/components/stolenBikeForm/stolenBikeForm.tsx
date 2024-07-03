@@ -21,6 +21,7 @@ import { MapCameraChangedEvent } from '@vis.gl/react-google-maps';
 import { Dayjs } from 'dayjs';
 import { fetchWrapper } from '@/utils/fetchWrapper';
 import { CONFIG } from '@/constances/config';
+import { useNavigate } from 'react-router-dom';
 interface FormErrors {
   user_id?: string;
   bike_id?: string;
@@ -54,7 +55,7 @@ export function StolenBikeForm() {
   const [errors, setErrors] = React.useState<FormErrors>({});
   const [bikeList, setBikeList] = React.useState([]);
   const [formSubmitMsg, setFormSubmitMsg] = React.useState('');
-
+  const navigate = useNavigate();
   React.useEffect(() => {
     const fetchBikes = async () => {
       try {
@@ -103,12 +104,16 @@ export function StolenBikeForm() {
     if (!Object.values(formErrors).some((error) => error)) {
       // Submit the form
       console.log('Form submitted', formData);
+      const token = localStorage.getItem('jwt');
       fetchWrapper
-        .post(`${CONFIG.BaseURL}/api/user-reports/`, formData)
+        .post(`${CONFIG.BaseURL}/api/user-reports/`, formData, {
+          Authorization: `Bearer ${token}`,
+        })
         .then((response) => {
           console.log(response);
           setFormData(initFormValue);
           setFormSubmitMsg('Your Report has been submitted');
+          navigate(`${CONFIG.PageRoute.MyBikesPage.path}`);
         });
     } else {
       console.log('Form has errors', formErrors);
@@ -222,29 +227,36 @@ export function StolenBikeForm() {
           modalTitle="Choos location on map"
           modalCloseElement={<span onClick={closeModal}>OK</span>}
         >
-          <CustomMap
-            defaultCenter={{ lat: 52.52, lng: 13.405 }}
-            handleCenterChanged={getMarkerLocation}
+          <Box
+            sx={{
+              width: '100%',
+              height: '70vh',
+            }}
           >
-            <Box
-              sx={{
-                position: 'absolute',
-                bottom: 'calc(50% - 30px)',
-                right: 'calc(50% - 30px)',
-              }}
+            <CustomMap
+              defaultCenter={{ lat: 52.52, lng: 13.405 }}
+              handleCenterChanged={getMarkerLocation}
             >
-              <LocationOnRoundedIcon
+              <Box
                 sx={{
-                  width: 60,
-                  height: 60,
-                  color: theme.palette.primary.dark,
+                  position: 'absolute',
+                  bottom: 'calc(50% - 30px)',
+                  right: 'calc(50% - 30px)',
                 }}
-              />
-            </Box>
-            <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
-              <CurrentLocation></CurrentLocation>
-            </Box>
-          </CustomMap>
+              >
+                <LocationOnRoundedIcon
+                  sx={{
+                    width: 60,
+                    height: 60,
+                    color: theme.palette.primary.dark,
+                  }}
+                />
+              </Box>
+              <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
+                <CurrentLocation></CurrentLocation>
+              </Box>
+            </CustomMap>
+          </Box>
         </CustomModal>
       </Box>
     </>

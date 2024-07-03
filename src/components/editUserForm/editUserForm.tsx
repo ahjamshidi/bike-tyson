@@ -159,7 +159,7 @@ export default function EditUserForm({ user }: { user: any }) {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Button variant="contained" fullWidth>
-              Register
+              Edit
             </Button>
           </Grid>
         </Grid>

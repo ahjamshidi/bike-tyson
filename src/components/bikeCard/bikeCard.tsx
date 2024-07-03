@@ -74,11 +74,12 @@ export default function BikeCard({ BikeData }: { BikeData: Bicycle }) {
             size="medium"
             variant="contained"
             fullWidth
+            disabled={BikeData?.reports?.length !== 0 ? true : false}
             onClick={() =>
               navigateToPath(CONFIG.PageRoute.stolenBikeReport.path)
             }
           >
-            Report
+            {BikeData?.reports?.length !== 0 ? 'has reported' : 'Report'}
           </Button>
         </CardActions>
       </Card>

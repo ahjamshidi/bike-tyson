@@ -38,15 +38,10 @@ const WelcomePage: React.FC = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        bgcolor="tranparent"
+        height="30vh"
         borderRadius={2}
-        p={4}
       >
-        <img
-          src="/welcome_bike.png"
-          alt="logo"
-          style={{ maxHeight: '200px', marginBottom: '20px' }}
-        />
+        <img src="/biketyson-logo.png" alt="logo" style={{ height: '100%' }} />
       </Box>
       <Box
         display="flex"
@@ -54,7 +49,9 @@ const WelcomePage: React.FC = () => {
         alignItems="center"
         bgcolor="white"
         width="100%"
-        borderRadius={2}
+        height="60vh"
+        justifyContent={'flex-end'}
+        sx={{borderTopLeftRadius:'16px',borderTopRightRadius:'16px'}}
         p={4}
         mt={2}
       >
@@ -105,14 +102,14 @@ const WelcomePage: React.FC = () => {
             />
           </ListItem>
         </List>
-        <Divider sx={{ width: '100%', my: 2 }}>Start Here</Divider>
-        <Box mt={2}>
+        <Divider sx={{ width: '100%' }}>Start Here</Divider>
+        <Box mt={2} sx={{width:'100%'}}>
           <Button
             variant="contained"
             sx={{
               backgroundColor: theme.palette.primary.dark,
               marginRight: '10px',
-              width: '150px',
+              width: 'calc(50% - 5px)',
               height: '50px',
             }}
             onClick={handleLoginPage}
@@ -123,7 +120,7 @@ const WelcomePage: React.FC = () => {
             variant="contained"
             sx={{
               backgroundColor: 'black',
-              width: '150px',
+              width: 'calc(50% - 5px)',
               height: '50px',
             }}
             onClick={handleVisitApp}

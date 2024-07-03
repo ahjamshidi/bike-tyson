@@ -2,6 +2,7 @@ import AddBikeForm from '@/components/addBikeForm/AddBikeForm';
 import { CONFIG } from '@/constances/config';
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
+
 export function AddBikePage({
   pageTitleHandler,
 }: {
