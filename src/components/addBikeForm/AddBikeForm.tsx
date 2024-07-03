@@ -12,6 +12,8 @@ import {
 } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Bicycle } from '@/interfaces/bike';
+import { CONFIG } from '@/constances/config';
+import { fetchWrapper } from '@/utils/fetchWrapper';
 
 export default function AddBikeForm() {
   const [bikeData, setBikeData] = useState<Bicycle>({
@@ -30,15 +32,19 @@ export default function AddBikeForm() {
     owner: true,
   });
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const [success, setSuccess] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleChange = (e: { target: { name: string; value: any } }) => {
     const { name, value } = e.target;
     let parsedValue = value;
     if (name === 'value') {
       parsedValue = parseInt(value);
-      // Check if parsedValue is NaN, if so, set it to a default value or handle accordingly
       if (isNaN(parsedValue)) {
         parsedValue = 0;
       }
+    } else if (name === 'owner') {
+      parsedValue = value === 'true';
     }
     setBikeData((prevState) => ({
       ...prevState,
@@ -48,60 +54,29 @@ export default function AddBikeForm() {
 
   const handleCreateBike = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/bicycles', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bikeData),
-      });
-
-      if (!response.ok) {
-        console.error(`Failed to create bicycle. Status: ${response.status}`);
-        throw new Error(`Failed to create bicycle. Status: ${response.status}`);
-      }
-
-      const responseData = await response.json();
-      if (responseData && responseData.id) {
-        console.log(responseData.id); 
-      } else {
-        console.log('Bicycle created, but no ID returned');
-      }
+      await fetchWrapper
+        .post(`${CONFIG.BaseURL}/api/bicycles`, bikeData)
+        .then(() => {
+          setSuccess('Bike added successfully.');
+          setTimeout(() => {
+            setSuccess(null);
+          }, 3000);
+        })
+        .catch((error) => {
+          console.error('Failed to add bike:', error);
+          setError(error.message || 'Failed to add bike.');
+          setTimeout(() => {
+            setError(null);
+          }, 3000);
+        });
     } catch (error) {
-      console.error(error);
+      console.error('Error during adding bike:', error);
+      setError('An unexpected error occurred. Please try again.');
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
     }
   };
-
-  // const handleCreateBike = async () => {
-  //   try {
-  //     fetch('http://localhost:3000/api/bicycles', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(bikeData),
-  //     })
-  //       .then((response) => response.json())
-  //       .then((response) => {
-  //         fetch('http://localhost:3000/api/bicycles', {
-  //           method: 'POST',
-  //           headers: {
-  //             'Content-Type': 'application/json',
-  //           },
-  //           body: JSON.stringify(bikeData),
-  //         });
-  //         console.log(response.id);
-  //       });
-
-  //     // if (!response.ok) {
-  //     //   throw new Error('Something went wrong');
-  //     // }
-
-  //     // console.log(data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   return (
     <>
@@ -143,7 +118,7 @@ export default function AddBikeForm() {
                 label='owner'
                 id='bike-owner'
                 name='owner'
-                value={bikeData.owner}
+                value={bikeData.owner.toString()}
                 onChange={handleChange}
               >
                 <MenuItem value='true'>Yes</MenuItem>
@@ -260,25 +235,25 @@ export default function AddBikeForm() {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            name='value'
-            id='bike-value'
-            label='Value'
-            placeholder='Value'
-            value={bikeData.value.toString()} // Convert to string to avoid NaN warnings
-            onChange={handleChange}
-            fullWidth
-            type='number'
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position='start'>$</InputAdornment>
-              ),
-              inputProps: {
-                min: 0,
-              },
-            }}
-          />
+            <TextField
+              required
+              name='value'
+              id='bike-value'
+              label='Value'
+              placeholder='Value'
+              value={bikeData.value.toString()} // Convert to string to avoid NaN warnings
+              onChange={handleChange}
+              fullWidth
+              type='number'
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position='start'>$</InputAdornment>
+                ),
+                inputProps: {
+                  min: 0,
+                },
+              }}
+            />
           </Grid>
           <Grid item xs={12} sm={12}>
             <Button variant='contained' fullWidth onClick={handleCreateBike}>
@@ -286,6 +261,8 @@ export default function AddBikeForm() {
             </Button>
           </Grid>
         </Grid>
+        {success && <div>{success}</div>}
+        {error && <div>{error}</div>}
       </Box>
     </>
   );
