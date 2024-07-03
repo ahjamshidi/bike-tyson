@@ -17,23 +17,15 @@ const ResetCode: React.FC = () => {
     try {
       fetchWrapper
         .post(`${CONFIG.BaseURL}/auth/verify-reset-code`, { email, code })
-        .then((response: any) => {
-          if (response.ok) {
-            setSuccess('Code verified successfully.');
-            setTimeout(() => {
-              navigate('/update-password', { state: { email, code } });
-            }, 3000);
-          } else {
-            const errorData = response.json();
-            setError(errorData.message || 'Invalid reset code.');
-            setTimeout(() => {
-              setError(null);
-            }, 3000);
-          }
+        .then(() => {
+          setSuccess('Code verified successfully.');
+          setTimeout(() => {
+            navigate('/update-password', { state: { email, code } });
+          }, 3000);
         })
         .catch((error) => {
           console.error('Failed to verify reset code:', error);
-          setError('An unexpected error occurred. Please try again.');
+          setError('Invalid reset code.');
           setTimeout(() => {
             setError(null);
           }, 3000);
@@ -84,7 +76,7 @@ const ResetCode: React.FC = () => {
           fullWidth
           variant='contained'
           color='primary'
-          sx={{ mt: 2 }}
+          sx={{ mt: 2, mb: 2, height: '50px' }}
           onClick={handleVerifyCode}
         >
           Verify Code
