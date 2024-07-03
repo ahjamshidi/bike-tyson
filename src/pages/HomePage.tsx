@@ -59,7 +59,6 @@ export function HomePage() {
     <Box
       sx={{
         width: '100%',
-        maxWidth: '500px',
         overflowY: 'auto',
         height: '100vh',
         position: 'relative',

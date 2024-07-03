@@ -27,6 +27,8 @@ export default function AppBottomNavigation() {
 
   React.useEffect(() => {
     checkAuthStatus();
+    console.log(location.pathname);
+    setValue(initpath);
   }, []);
 
   return (
@@ -46,13 +48,13 @@ export default function AppBottomNavigation() {
           value={routeNames.HomePage.path}
         />
         <BottomNavigationAction
-          label='Bikes'
+          label="Bikes"
           icon={<DirectionsBikeRoundedIcon />}
           value={routeNames.MyBikesPage.path}
           sx={{ maxWidth: 125 }}
         />
         <BottomNavigationAction
-          label='Reports'
+          label="Reports"
           icon={<ListAltRoundedIcon />}
           value={routeNames.UserReportsPage.path}
           sx={{ maxWidth: 125 }}
