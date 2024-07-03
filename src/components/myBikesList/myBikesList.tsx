@@ -47,17 +47,18 @@ export default function MyBikesList() {
 
   if (!isAuthenticated) {
     return (
-      <Box component="div" sx={{ textAlign: 'center', marginTop: 3 }}>
+      <Box component="div" sx={{ textAlign: 'center', height:'100%',display:'flex',alignItems:'center',flexDirection:'column',justifyContent:'center' }}>
         <Typography variant="h6" color="text.secondary">
           You need to log in to access this functionality.
         </Typography>
         <Button
           variant="contained"
           color="primary"
+          fullWidth
           onClick={() => navigate(CONFIG.PageRoute.login.path)}
           sx={{ marginTop: 2, height: '50px' }}
         >
-          Go to Login
+          Login
         </Button>
       </Box>
     );

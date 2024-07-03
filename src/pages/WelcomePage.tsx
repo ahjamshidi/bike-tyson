@@ -102,7 +102,7 @@ const WelcomePage: React.FC = () => {
             />
           </ListItem>
         </List>
-        <Divider sx={{ width: '100%', my: 2 }}>Start Here</Divider>
+        <Divider sx={{ width: '100%' }}>Start Here</Divider>
         <Box mt={2} sx={{width:'100%'}}>
           <Button
             variant="contained"
