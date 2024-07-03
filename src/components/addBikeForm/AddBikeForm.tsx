@@ -61,8 +61,11 @@ export default function AddBikeForm() {
 
   const handleCreateBike = async () => {
     try {
+      const token = localStorage.getItem('jwt');
       await fetchWrapper
-        .post(`${CONFIG.BaseURL}/api/bicycles`, bikeData)
+        .post(`${CONFIG.BaseURL}/api/bicycles`, bikeData, {
+          Authorization: `Bearer ${token}`,
+        })
         .then(async (bikeResponse) => {
           if (files && files.length > 0) {
             const formData = new FormData();
@@ -96,6 +99,8 @@ export default function AddBikeForm() {
             }
 
             console.log('Photos uploaded successfully');
+          } else {
+            navigate('/my-bikes-list');
           }
         })
         .catch((error) => {
@@ -117,30 +122,30 @@ export default function AddBikeForm() {
   return (
     <>
       <Box
-        component='form'
+        component="form"
         noValidate={false}
-        autoComplete='on'
+        autoComplete="on"
         onSubmit={handleCreateBike}
       >
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} sx={{ textAlign: 'center' }}>
             <Button
-              className='photos_url'
-              component='label'
-              variant='contained'
+              className="photos_url"
+              component="label"
+              variant="contained"
               startIcon={<CloudUploadIcon />}
             >
               Bike image
-              <input type='file' hidden multiple onChange={handleFileChange} />
+              <input type="file" hidden multiple onChange={handleFileChange} />
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              name='name'
-              id='bike-name'
+              name="name"
+              id="bike-name"
               label="Bike's name"
-              placeholder='My bike'
+              placeholder="My bike"
               value={bikeData.name}
               onChange={handleChange}
               fullWidth
@@ -148,26 +153,26 @@ export default function AddBikeForm() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth required>
-              <InputLabel id='Owner'>Owner</InputLabel>
+              <InputLabel id="Owner">Owner</InputLabel>
               <Select
-                label='owner'
-                id='bike-owner'
-                name='owner'
+                label="owner"
+                id="bike-owner"
+                name="owner"
                 value={bikeData.owner.toString()}
                 onChange={handleChange}
               >
-                <MenuItem value='true'>Yes</MenuItem>
-                <MenuItem value='false'>No</MenuItem>
+                <MenuItem value="true">Yes</MenuItem>
+                <MenuItem value="false">No</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              name='brand'
-              id='bike-brand'
-              label='Brand'
-              placeholder='Trek / Cube'
+              name="brand"
+              id="bike-brand"
+              label="Brand"
+              placeholder="Trek / Cube"
               value={bikeData.brand}
               onChange={handleChange}
               fullWidth
@@ -176,10 +181,10 @@ export default function AddBikeForm() {
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              name='model'
-              id='bike-model-year'
-              label='Model/Year'
-              placeholder='Dual Sport - 2019'
+              name="model"
+              id="bike-model-year"
+              label="Model/Year"
+              placeholder="Dual Sport - 2019"
               value={bikeData.model}
               onChange={handleChange}
               fullWidth
@@ -188,10 +193,10 @@ export default function AddBikeForm() {
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              name='frame_num'
-              id='frame-number'
-              label='Frame number'
-              placeholder='Your frame number'
+              name="frame_num"
+              id="frame-number"
+              label="Frame number"
+              placeholder="Your frame number"
               value={bikeData.frame_num}
               onChange={handleChange}
               fullWidth
@@ -199,30 +204,30 @@ export default function AddBikeForm() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth required>
-              <InputLabel id='frame-size-label'>Frame Size</InputLabel>
+              <InputLabel id="frame-size-label">Frame Size</InputLabel>
               <Select
-                labelId='frame-size-label'
-                id='frame-size'
-                name='frame_size'
+                labelId="frame-size-label"
+                id="frame-size"
+                name="frame_size"
                 value={bikeData.frame_size}
                 onChange={handleChange}
-                label='Frame Size'
+                label="Frame Size"
               >
-                <MenuItem value='XS'>XS</MenuItem>
-                <MenuItem value='S'>S</MenuItem>
-                <MenuItem value='M'>M</MenuItem>
-                <MenuItem value='L'>L</MenuItem>
-                <MenuItem value='XL'>XL</MenuItem>
+                <MenuItem value="XS">XS</MenuItem>
+                <MenuItem value="S">S</MenuItem>
+                <MenuItem value="M">M</MenuItem>
+                <MenuItem value="L">L</MenuItem>
+                <MenuItem value="XL">XL</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              name='colour'
-              id='bike-colour'
-              label='Colour'
-              placeholder='Colour'
+              name="colour"
+              id="bike-colour"
+              label="Colour"
+              placeholder="Colour"
               value={bikeData.colour}
               onChange={handleChange}
               fullWidth
@@ -230,28 +235,28 @@ export default function AddBikeForm() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth required>
-              <InputLabel id='bike-gender-label'>Gender</InputLabel>
+              <InputLabel id="bike-gender-label">Gender</InputLabel>
               <Select
-                labelId='bike-gender-label'
-                id='bike-gender'
-                name='gender'
+                labelId="bike-gender-label"
+                id="bike-gender"
+                name="gender"
                 value={bikeData.gender}
                 onChange={handleChange}
-                label='Gender'
+                label="Gender"
               >
-                <MenuItem value='M'>M</MenuItem>
-                <MenuItem value='F'>F</MenuItem>
-                <MenuItem value='U'>Unisex</MenuItem>
+                <MenuItem value="M">M</MenuItem>
+                <MenuItem value="F">F</MenuItem>
+                <MenuItem value="U">Unisex</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              name='type'
-              id='bike-type'
-              label='Type'
-              placeholder='Type'
+              name="type"
+              id="bike-type"
+              label="Type"
+              placeholder="Type"
               value={bikeData.type}
               onChange={handleChange}
               fullWidth
@@ -260,10 +265,10 @@ export default function AddBikeForm() {
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              name='description'
-              id='bike-description'
-              label='Description'
-              placeholder='Description'
+              name="description"
+              id="bike-description"
+              label="Description"
+              placeholder="Description"
               value={bikeData.description}
               onChange={handleChange}
               fullWidth
@@ -272,17 +277,17 @@ export default function AddBikeForm() {
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              name='value'
-              id='bike-value'
-              label='Value'
-              placeholder='Value'
+              name="value"
+              id="bike-value"
+              label="Value"
+              placeholder="Value"
               value={bikeData.value.toString()} // Convert to string to avoid NaN warnings
               onChange={handleChange}
               fullWidth
-              type='number'
+              type="number"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position='start'>€</InputAdornment>
+                  <InputAdornment position="start">€</InputAdornment>
                 ),
                 inputProps: {
                   min: 0,
@@ -291,7 +296,7 @@ export default function AddBikeForm() {
             />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <Button variant='contained' fullWidth onClick={handleCreateBike}>
+            <Button variant="contained" fullWidth onClick={handleCreateBike}>
               Add Bike
             </Button>
           </Grid>

@@ -104,13 +104,16 @@ export function StolenBikeForm() {
     if (!Object.values(formErrors).some((error) => error)) {
       // Submit the form
       console.log('Form submitted', formData);
+      const token = localStorage.getItem('jwt');
       fetchWrapper
-        .post(`${CONFIG.BaseURL}/api/user-reports/`, formData)
+        .post(`${CONFIG.BaseURL}/api/user-reports/`, formData, {
+          Authorization: `Bearer ${token}`,
+        })
         .then((response) => {
           console.log(response);
           setFormData(initFormValue);
           setFormSubmitMsg('Your Report has been submitted');
-          navigate(`${CONFIG.PageRoute.MyBikesList.path}`);
+          navigate(`${CONFIG.PageRoute.MyBikesPage.path}`);
         });
     } else {
       console.log('Form has errors', formErrors);

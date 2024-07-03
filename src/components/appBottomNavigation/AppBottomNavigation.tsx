@@ -27,8 +27,6 @@ export default function AppBottomNavigation() {
 
   React.useEffect(() => {
     checkAuthStatus();
-    console.log(location.pathname);
-    setValue(initpath);
   }, []);
 
   return (

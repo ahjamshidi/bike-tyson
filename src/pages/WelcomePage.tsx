@@ -50,8 +50,8 @@ const WelcomePage: React.FC = () => {
         bgcolor="white"
         width="100%"
         height="60vh"
-        justifyContent={'center'}
-        borderRadius={2}
+        justifyContent={'flex-end'}
+        sx={{borderTopLeftRadius:'16px',borderTopRightRadius:'16px'}}
         p={4}
         mt={2}
       >
@@ -103,13 +103,13 @@ const WelcomePage: React.FC = () => {
           </ListItem>
         </List>
         <Divider sx={{ width: '100%', my: 2 }}>Start Here</Divider>
-        <Box mt={2}>
+        <Box mt={2} sx={{width:'100%'}}>
           <Button
             variant="contained"
             sx={{
               backgroundColor: theme.palette.primary.dark,
               marginRight: '10px',
-              width: '140px',
+              width: 'calc(50% - 5px)',
               height: '50px',
             }}
             onClick={handleLoginPage}
@@ -120,7 +120,7 @@ const WelcomePage: React.FC = () => {
             variant="contained"
             sx={{
               backgroundColor: 'black',
-              width: '140px',
+              width: 'calc(50% - 5px)',
               height: '50px',
             }}
             onClick={handleVisitApp}

@@ -11,10 +11,14 @@ export default function EditBikeForm({ bikeId }: any) {
 
   useEffect(() => {
     if (bikeId) {
+      const token = localStorage.getItem('jwt');
       const fetchData = async () => {
         try {
           const response = await fetchWrapper.get(
-            `${CONFIG.BaseURL}/api/bicycles/${bikeId}`
+            `${CONFIG.BaseURL}/api/bicycles/${bikeId}`,
+            {
+              Authorization: `Bearer ${token}`,
+            }
           );
           setBikeData(response[0]);
         } catch (error) {

@@ -15,8 +15,8 @@ export default function MyBikesList() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem('jwt');
     const checkAuthStatus = () => {
-      const token = localStorage.getItem('jwt');
       setIsAuthenticated(!!token);
     };
 
@@ -27,9 +27,11 @@ export default function MyBikesList() {
           console.error('User is not authenticated');
           return;
         }
-
         const response = await fetchWrapper.get(
-          `${CONFIG.BaseURL}/api/bicycles/user/${userId}`
+          `${CONFIG.BaseURL}/api/bicycles/user/${userId}`,
+          {
+            Authorization: `Bearer ${token}`,
+          }
         );
         setBikes(response);
       } catch (error) {
@@ -45,13 +47,13 @@ export default function MyBikesList() {
 
   if (!isAuthenticated) {
     return (
-      <Box component='div' sx={{ textAlign: 'center', marginTop: 3 }}>
-        <Typography variant='h6' color='text.secondary'>
+      <Box component="div" sx={{ textAlign: 'center', marginTop: 3 }}>
+        <Typography variant="h6" color="text.secondary">
           You need to log in to access this functionality.
         </Typography>
         <Button
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
           onClick={() => navigate(CONFIG.PageRoute.login.path)}
           sx={{ marginTop: 2, height: '50px' }}
         >
@@ -63,7 +65,7 @@ export default function MyBikesList() {
 
   return (
     <>
-      <Box component='div'>
+      <Box component="div">
         <Grid
           item
           xs={12}
@@ -77,12 +79,12 @@ export default function MyBikesList() {
               justifyContent: 'space-between',
             }}
           >
-            <Typography sx={{}} color='text.secondary'>
+            <Typography sx={{}} color="text.secondary">
               Add your new bikes.
             </Typography>
             <Link to={CONFIG.PageRoute.AddBikePage.path}>
               <Fab
-                size='medium'
+                size="medium"
                 sx={{
                   borderRadius: '20%',
                   backgroundColor: '#fff',
