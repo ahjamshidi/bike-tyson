@@ -18,6 +18,7 @@ export const CONFIG: {
   BaseURL: string;
   BikeImgPlaceholder: string;
   BicycleBucketName: string;
+  UserBucketName: string;
   GoogleLogin: string;
   MainPages: string[];
   PageRoute: PageRouteType;
@@ -27,6 +28,7 @@ export const CONFIG: {
   BikeImgPlaceholder: '/placeholder_biketyson.png',
   BicycleBucketName:
     process.env.BICYCLE_BUCKET_NAME || 'byketyson-bicycle-photos',
+  UserBucketName: process.env.USER_BUCKET_NAME || 'byketyson-user-photos',
   GoogleLogin: process.env.BACKENDURL + '/auth/google',
   MainPages: [
     PageRoute.HomePage.path,
