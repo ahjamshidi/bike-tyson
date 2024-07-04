@@ -83,7 +83,7 @@ const LoginForm: React.FC = () => {
         flexDirection='column'
         alignItems='center'
         justifyContent='center'
-        height='100vh'
+        height='100dvh'
         p={2}
         bgcolor='background.paper'
       >
