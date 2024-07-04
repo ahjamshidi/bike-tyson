@@ -78,7 +78,7 @@ const ProfilePage = ({
         display="flex"
         justifyContent="center"
         alignItems="center"
-        height="100vh"
+        height="100dvh"
       >
         <Typography>Loading...</Typography>
       </Box>
@@ -96,7 +96,7 @@ const ProfilePage = ({
           width: '100%',
           maxWidth: '500px',
           overflowY: 'auto',
-          maxHeight: 'calc(100vh - 120px)',
+          maxHeight: 'calc(100dvh - 120px)',
           padding: '0 20px',
           boxSizing: 'border-box',
           mt: 8,

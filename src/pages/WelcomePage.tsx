@@ -31,7 +31,7 @@ const WelcomePage: React.FC = () => {
       flexDirection="column"
       alignItems="center"
       justifyContent="flex-end"
-      height="100vh"
+      height="100dvh"
       bgcolor={theme.palette.primary.dark}
     >
       <Box

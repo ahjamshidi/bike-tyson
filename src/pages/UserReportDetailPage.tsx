@@ -17,7 +17,7 @@ export default function UserReportDetailPage ({
             width: '100%',
             maxWidth: '500px',
             overflowY: 'auto',
-            maxHeight: 'calc(100vh - 120px)',
+            maxHeight: 'calc(100dvh - 120px)',
             padding: '0 20px',
             boxSizing: 'border-box',
             mt: 8,

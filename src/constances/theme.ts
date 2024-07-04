@@ -5,7 +5,7 @@ export const themeOptions: ThemeOptions = {
       styleOverrides: {
         body: {
           margin: 0,
-          height: '100vh',
+          height: '100dvh',
           overflow: 'hidden', // Prevent body scroll
         },
       },

@@ -17,7 +17,7 @@ export function MyBikesPage({
         width: '100%',
         maxWidth: '500px',
         overflowY: 'auto',
-        height: 'calc(100vh - 120px)',
+        height: 'calc(100dvh - 120px)',
         padding: '0 20px',
         boxSizing: 'border-box',
         mt: 8,

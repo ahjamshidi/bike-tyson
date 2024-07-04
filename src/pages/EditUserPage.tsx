@@ -20,7 +20,7 @@ export function EditUserPage({
         width: '100%',
         maxWidth: '500px',
         overflowY: 'auto',
-        maxHeight: 'calc(100vh - 120px)',
+        maxHeight: 'calc(d - 120px)',
         padding: '0 20px',
         boxSizing: 'border-box',
         mt: 8,

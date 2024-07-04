@@ -60,7 +60,7 @@ export function HomePage() {
       sx={{
         width: '100%',
         overflowY: 'auto',
-        height: '100vh',
+        height: '100dvh',
         position: 'relative',
       }}
     >
