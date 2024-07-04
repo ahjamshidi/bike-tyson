@@ -49,6 +49,14 @@ const RegisterPage: React.FC = () => {
       return;
     }
 
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+      return;
+    }
+
     try {
       fetchWrapper
         .post(`${CONFIG.BaseURL}/auth/register`, {
@@ -58,7 +66,7 @@ const RegisterPage: React.FC = () => {
           last_name: lastName,
         })
         .then((response: any) => {
-          if (response.ok) {
+          if (response.id) {
             setSuccess('Registration successful! Redirecting to login...');
             setTimeout(() => {
               navigate('/login', { replace: true });

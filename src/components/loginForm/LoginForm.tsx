@@ -25,13 +25,41 @@ const LoginForm: React.FC = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError('Please enter a valid email address');
+      return false;
+    }
+    setEmailError(null);
+    return true;
+  };
+
+  const validatePassword = (password: string) => {
+    if (password.length < 6) {
+      setPasswordError('Password must be at least 6 characters long');
+      return false;
+    }
+    setPasswordError(null);
+    return true;
+  };
+
   const handleLoginBtn = async () => {
+    const isEmailValid = validateEmail(email);
+    const isPasswordValid = validatePassword(password);
+
+    if (!isEmailValid || !isPasswordValid) {
+      return;
+    }
+
     try {
       fetchWrapper
         .post(`${CONFIG.BaseURL}/auth/login`, { email, password })
@@ -50,9 +78,7 @@ const LoginForm: React.FC = () => {
             }, 3000);
           }
         })
-        .catch((error) =>
-          console.error('Failed to fetch bikes details:', error)
-        );
+        .catch((error) => console.error('Login failed:', error));
     } catch (error) {
       console.error('Error during login:', error);
       setError('An unexpected error occurred. Please try again.');
@@ -102,6 +128,9 @@ const LoginForm: React.FC = () => {
           margin='normal'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onBlur={() => validateEmail(email)}
+          error={!!emailError}
+          helperText={emailError}
         />
         <TextField
           fullWidth
@@ -111,6 +140,9 @@ const LoginForm: React.FC = () => {
           margin='normal'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onBlur={() => validatePassword(password)}
+          error={!!passwordError}
+          helperText={passwordError}
           InputProps={{
             endAdornment: (
               <InputAdornment position='end'>
